@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32303c_eval_i2c_tsensor.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    23-October-2012
+  * @version V1.0.2
+  * @date    04-April-2014
   * @brief   This file provides a set of functions needed to manage the I2C TS751 
   *          temperature sensor mounted on STM32303C-EVAL board . 
   *          It implements a high level communication layer for read and write 
@@ -30,7 +30,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2012 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -332,7 +332,7 @@ uint8_t TS751_AlerteResponseAddressRead(void)
 {   
   uint8_t TS751_BufferRX[1] ={0};
   
-  /**************** Read Alerte Response Address ***********************/
+  /**************** Read Alert Response Address ***********************/
   /* Test on BUSY Flag */
   TS751_Timeout = TS751_LONG_TIMEOUT;
   while(I2C_GetFlagStatus(TS751_I2C, I2C_ISR_BUSY) != RESET)
@@ -340,7 +340,7 @@ uint8_t TS751_AlerteResponseAddressRead(void)
     if((TS751_Timeout--) == 0) return TS751_TIMEOUT_UserCallback();
   }
   /* Configure slave address, nbytes, reload, end mode and start generation */
-  I2C_TransferHandling(TS751_I2C, 0x18, 1, I2C_AutoEnd_Mode, I2C_Generate_Start_Read); 
+  I2C_TransferHandling(TS751_I2C, 0x19, 1, I2C_AutoEnd_Mode, I2C_Generate_Start_Read); 
   /* Wait until RXNE flag is set */
   TS751_Timeout = TS751_LONG_TIMEOUT;    
   while(I2C_GetFlagStatus(TS751_I2C, I2C_ISR_RXNE) == RESET)

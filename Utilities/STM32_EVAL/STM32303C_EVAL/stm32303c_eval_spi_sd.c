@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32303c_eval_spi_sd.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    23-October-2012
+  * @version V1.0.2
+  * @date    04-April-2014
   * @brief   This file provides a set of functions needed to manage the SPI SD 
   *          Card memory mounted on STM32303C-EVAL board.
   *          It implements a high level communication layer for read and write 
@@ -31,7 +31,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2012 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -681,7 +681,7 @@ void SD_SendCmd(uint8_t Cmd, uint32_t Arg, uint8_t Crc)
   * @brief  Get SD card data response.
   * @param  None
   * @retval The SD status: Read data response xxx0<status>1
-  *         - status 010: Data accecpted
+  *         - status 010: Data accepted
   *         - status 101: Data rejected due to a crc error
   *         - status 110: Data rejected due to a Write error.
   *         - status 111: Data rejected due to other error.
@@ -693,7 +693,7 @@ uint8_t SD_GetDataResponse(void)
 
   while (i <= 64)
   {
-    /*!< Read resonse */
+    /*!< Read response */
     response = SD_ReadByte();
     /*!< Mask unused bits */
     response &= 0x1F;

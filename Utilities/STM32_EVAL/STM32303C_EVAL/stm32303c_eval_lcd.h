@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32303c_eval_lcd.h
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    23-October-2012
+  * @version V1.0.2
+  * @date    04-April-2014
   * @brief   This file contains all the functions prototypes for the stm32303c_eval_lcd
   *          firmware driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2012 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -53,23 +53,16 @@
 /** @addtogroup STM32303C_EVAL_LCD
   * @{
   */ 
-
-
-/** @defgroup STM32303C_EVAL_LCD_Exported_Types
-  * @{
-  */ 
+  
+/* Exported types ------------------------------------------------------------*/ 
+ 
 typedef struct 
 {
   int16_t X;
   int16_t Y;
 } Point, * pPoint;
-/**
-  * @}
-  */ 
 
-/** @defgroup STM32303C_EVAL_LCD_Exported_Constants
-  * @{
-  */ 
+/* Exported constants --------------------------------------------------------*/ 
 
 /**
  * @brief Uncomment the line below if you want to use LCD_DrawBMP function to
@@ -335,22 +328,10 @@ typedef struct
 #define LCD_PIXEL_WIDTH          0x0140
 #define LCD_PIXEL_HEIGHT         0x00F0
 
-/**
-  * @}
-  */ 
-
-/** @defgroup STM32303C_EVAL_LCD_Exported_Macros
-  * @{
-  */ 
+/* Exported macro ------------------------------------------------------------*/ 
 #define ASSEMBLE_RGB(R, G, B)    ((((R)& 0xF8) << 8) | (((G) & 0xFC) << 3) | (((B) & 0xF8) >> 3)) 
 
-/**
-  * @}
-  */ 
-
-/** @defgroup STM32303C_EVAL_LCD_Exported_Functions
-  * @{
-  */ 
+/* Exported functions ------------------------------------------------------- */ 
 void LCD_DeInit(void);
 void LCD_Setup(void);
 void LCD_SwapDirection(FunctionalState NewState);
@@ -359,19 +340,19 @@ void LCD_SetColors(__IO uint16_t _TextColor, __IO uint16_t _BackColor);
 void LCD_GetColors(__IO uint16_t *_TextColor, __IO uint16_t *_BackColor); 
 void LCD_SetTextColor(__IO uint16_t Color);
 void LCD_SetBackColor(__IO uint16_t Color);
-void LCD_ClearLine(uint8_t Line);
+void LCD_ClearLine(uint16_t Line);
 void LCD_Clear(uint16_t Color);
-void LCD_SetCursor(uint8_t Xpos, uint16_t Ypos);
-void LCD_DrawChar(uint8_t Xpos, uint16_t Ypos, const uint16_t *c);
-void LCD_DisplayChar(uint8_t Line, uint16_t Column, uint8_t Ascii);
+void LCD_SetCursor(uint16_t Xpos, uint16_t Ypos);
+void LCD_DrawChar(uint16_t Xpos, uint16_t Ypos, const uint16_t *c);
+void LCD_DisplayChar(uint16_t Line, uint16_t Column, uint8_t Ascii);
 void LCD_SetFont(sFONT *fonts);
 sFONT *LCD_GetFont(void);
-void LCD_DisplayStringLine(uint8_t Line, uint8_t *ptr);
-void LCD_SetDisplayWindow(uint8_t Xpos, uint16_t Ypos, uint8_t Height, uint16_t Width);
+void LCD_DisplayStringLine(uint16_t Line, uint8_t *ptr);
+void LCD_SetDisplayWindow(uint16_t Xpos, uint16_t Ypos, uint8_t Height, uint16_t Width);
 void LCD_WindowModeDisable(void);
-void LCD_DrawLine(uint8_t Xpos, uint16_t Ypos, uint16_t Length, uint8_t Direction);
-void LCD_DrawRect(uint8_t Xpos, uint16_t Ypos, uint8_t Height, uint16_t Width);
-void LCD_DrawCircle(uint8_t Xpos, uint16_t Ypos, uint16_t Radius);
+void LCD_DrawLine(uint16_t Xpos, uint16_t Ypos, uint16_t Length, uint8_t Direction);
+void LCD_DrawRect(uint16_t Xpos, uint16_t Ypos, uint8_t Height, uint16_t Width);
+void LCD_DrawCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius);
 void LCD_DrawMonoPict(const uint32_t *Pict);
 void LCD_DrawBMP(uint32_t BmpAddress);
 void LCD_DrawUniLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2);
@@ -393,14 +374,10 @@ void LCD_PowerOn(void);
 void LCD_DisplayOn(void);
 void LCD_DisplayOff(void);
 
-
 void LCD_CtrlLinesConfig(void);
 void LCD_CtrlLinesWrite(GPIO_TypeDef* GPIOx, uint16_t CtrlPins, BitAction BitVal);
 void LCD_SPIConfig(void);
 
-/**
-  * @}
-  */ 
   
 #ifdef __cplusplus
 }

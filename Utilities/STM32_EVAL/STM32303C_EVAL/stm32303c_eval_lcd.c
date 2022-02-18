@@ -2,15 +2,15 @@
   ******************************************************************************
   * @file    stm32303c_eval_lcd.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    23-October-2012
+  * @version V1.0.2
+  * @date    04-April-2014
   * @brief   This file includes the LCD driver for AM-240320L8TNQW00H (ILI9320), 
   *          AM-240320LDTNQW00H (SPFD5408B) and AM240320LGTNQW00H (HX8347D) 
   *          Liquid Crystal Display Module of STM32303C-EVAL board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2012 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -50,51 +50,28 @@
   * @{
   */ 
 
-/** @defgroup STM32303C_EVAL_LCD_Private_Types
-  * @{
-  */ 
-/**
-  * @}
-  */ 
-
-/** @defgroup STM32303C_EVAL_LCD_Private_Defines
-  * @{
-  */ 
+/* Private typedef -----------------------------------------------------------*/
+/* Private define ------------------------------------------------------------*/ 
 #define START_BYTE         0x70
 #define SET_INDEX          0x00
 #define READ_STATUS        0x01
 #define LCD_WRITE_REG      0x02
 #define LCD_READ_REG       0x03
 #define MAX_POLY_CORNERS   200
-#define POLY_Y(Z)          ((int32_t)((Points + Z)->X))
-#define POLY_X(Z)          ((int32_t)((Points + Z)->Y))
-/**
-  * @}
-  */ 
 
-/** @defgroup STM32303C_EVAL_LCD_Private_Macros
-  * @{
-  */ 
-#define ABS(X)  ((X) > 0 ? (X) : -(X))  
-/**
-  * @}
-  */ 
+#define POLY_Y(Z)          ((int32_t)((Points + (Z))->X))
+#define POLY_X(Z)          ((int32_t)((Points + (Z))->Y))
 
-/** @defgroup STM32303C_EVAL_LCD_Private_Variables
-  * @{
-  */ 
+/* Private macro -------------------------------------------------------------*/
+#define ABS(X)  ((X) > 0 ? (X) : -(X))
+
+/* Private variables ---------------------------------------------------------*/ 
 static sFONT *LCD_Currentfonts;
 /* Global variables to set the written text color */
 static __IO uint16_t TextColor = 0x0000, BackColor = 0xFFFF;
 __IO uint32_t LCDType = 0;
 
-/**
-  * @}
-  */ 
-
-/** @defgroup STM32303C_EVAL_LCD_Private_Function_Prototypes
-  * @{
-  */ 
+/* Private function prototypes -----------------------------------------------*/ 
 #ifndef USE_Delay
 static void delay(__IO uint32_t nCount);
 #endif /* USE_Delay*/
@@ -102,13 +79,11 @@ static void delay(__IO uint32_t nCount);
 static void PutPixel(int16_t x, int16_t y);
 static void LCD_PolyLineRelativeClosed(pPoint Points, uint16_t PointCount, uint16_t Closed);
 
-/**
-  * @}
-  */ 
+/* Private functions ---------------------------------------------------------*/ 
 
 /** @defgroup STM32303C_EVAL_LCD_Private_Functions
   * @{
-  */ 
+  */
 
 /**
   * @brief  DeInitializes the LCD.
@@ -119,16 +94,16 @@ void LCD_DeInit(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
 
-  /*!< LCD Display Off */
+  /* LCD Display Off */
   LCD_DisplayOff();
 
-  /*!< LCD_SPI disable */
+  /* LCD_SPI disable */
   SPI_Cmd(LCD_SPI, DISABLE);
-  
-  /*!< LCD_SPI DeInit */
+
+  /* LCD_SPI DeInit */
   SPI_I2S_DeInit(LCD_SPI);
-   
-  /*!< Disable SPI clock  */
+
+  /* Disable SPI clock  */
   RCC_APB1PeriphClockCmd(LCD_SPI_CLK, DISABLE);
 
   /* Configure NCS in Output Push-Pull mode */
@@ -136,31 +111,25 @@ void LCD_DeInit(void)
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
   GPIO_Init(LCD_NCS_GPIO_PORT, &GPIO_InitStructure);
-   
+
   /* Configure SPI pins: SCK, MISO and MOSI */
   GPIO_InitStructure.GPIO_Pin = LCD_SPI_SCK_PIN;
   GPIO_Init(LCD_SPI_SCK_GPIO_PORT, &GPIO_InitStructure);
 
   GPIO_InitStructure.GPIO_Pin = LCD_SPI_MISO_PIN;
   GPIO_Init(LCD_SPI_MISO_GPIO_PORT, &GPIO_InitStructure);
-  
+
   GPIO_InitStructure.GPIO_Pin = LCD_SPI_MOSI_PIN;
   GPIO_Init(LCD_SPI_MOSI_GPIO_PORT, &GPIO_InitStructure);
 }
 
 /**
-  * @brief  Setups the LCD.
+  * @brief  Setup the LCD.
   * @param  None
   * @retval None
   */
 void LCD_Setup(void)
 {
-/* Configure the LCD Control pins --------------------------------------------*/
-  LCD_CtrlLinesConfig();
-  
-/* Configure the LCD_SPI interface ----------------------------------------------*/
-  LCD_SPIConfig();
-  
   if(LCDType == LCD_ILI9320)
   {
     _delay_(5); /* Delay 50 ms */
@@ -204,7 +173,7 @@ void LCD_Setup(void)
     LCD_WriteReg(LCD_REG_57, 0x0007);
     LCD_WriteReg(LCD_REG_60, 0x0600);
     LCD_WriteReg(LCD_REG_61, 0x020b);
-  
+
     /* Set GRAM area ---------------------------------------------------------*/
     LCD_WriteReg(LCD_REG_80, 0x0000); /* Horizontal GRAM Start Address */
     LCD_WriteReg(LCD_REG_81, 0x00EF); /* Horizontal GRAM End Address */
@@ -234,7 +203,7 @@ void LCD_Setup(void)
     LCD_WriteReg(LCD_REG_7, 0x0173); /* 262K color and display ON */
   }
   else if(LCDType == LCD_SPFD5408)
-  {   
+  {
     /* Start Initial Sequence --------------------------------------------------*/
     LCD_WriteReg(LCD_REG_227, 0x3008); /* Set internal timing */
     LCD_WriteReg(LCD_REG_231, 0x0012); /* Set internal timing */
@@ -304,7 +273,7 @@ void LCD_Setup(void)
        AM=1 (address is updated in vertical writing direction) */
     LCD_WriteReg(LCD_REG_3, 0x1018);
     LCD_WriteReg(LCD_REG_7, 0x0112);   /* 262K color and display ON */
-  } 
+  }
   else if(LCDType == LCD_HX8347D)
   {
     /* Driving ability setting */
@@ -385,9 +354,7 @@ void LCD_Setup(void)
     LCD_WriteReg(LCD_REG_8, 0x00); /* Row address end 2 */
     LCD_WriteReg(LCD_REG_9, 0xEF); /* Row address end 1 */
     LCD_WriteReg(LCD_REG_22, 0xE0); /* Memory access control: MY = 1, MX = 0, MV = 1, ML = 0 */
-  } 
-  /* Set default font */    
-  LCD_SetFont(&LCD_DEFAULT_FONT);
+  }
 }
 
 /**
@@ -425,8 +392,8 @@ void LCD_SwapDirection(FunctionalState NewState)
       /* I/D=00 (Horizontal : decrement, Vertical : decrement) */
       /* AM=1 (address is updated in vertical writing direction) */
       LCD_WriteReg(LCD_REG_3, 0x1018);
-    }    
-  } 
+    }
+  }
 }
 
 /**
@@ -438,31 +405,31 @@ void STM32303C_LCD_Init(void)
 {
   __IO uint32_t lcdid = 0;
   
-  /* Setups the LCD */
-  LCD_Setup();
-
+  /* Configure the LCD Control pins ------------------------------------------*/
+  LCD_CtrlLinesConfig();
+  
+  /* Configure the LCD_SPI interface -----------------------------------------*/
+  LCD_SPIConfig();
+  
   /* Read the LCD ID */
   lcdid = LCD_ReadReg(0x00);  
-  
+
   if (lcdid == LCD_SPFD5408)
   {
     LCDType = LCD_SPFD5408;
-        /* Setups the LCD */
-    LCD_Setup();
   }
   else if (lcdid == LCD_ILI9320)
   {
-    LCDType = LCD_ILI9320;
-    /* Setups the LCD */
-    LCD_Setup();    
-  }  
+    LCDType = LCD_ILI9320;    
+  }
   else
   {
     LCDType = LCD_HX8347D;
-        /* Setups the LCD */
-    LCD_Setup();
-  } 
-    
+  }
+  
+  /* Setup the LCD */
+  LCD_Setup();
+
   LCD_SetFont(&LCD_DEFAULT_FONT);
 }
 
@@ -535,31 +502,27 @@ sFONT *LCD_GetFont(void)
 /**
   * @brief  Clears the selected line.
   * @param  Line: the Line to be cleared.
-  *   This parameter can be one of the following values:
-  *     @arg Linex: where x can be 0..n
+  *    This parameter can be one of the following values:
+  *      @arg LCD_LINE_x: where x can be 0..29
   * @retval None
   */
-void LCD_ClearLine(uint8_t Line)
+void LCD_ClearLine(uint16_t Line)
 {
-  uint16_t refcolumn = 319;
-  int16_t deltacolumn = -LCD_Currentfonts->Width;
-  uint32_t i = 0;
+  uint16_t refcolumn = LCD_PIXEL_WIDTH - 1;
   
-  /* Send the string character by character on lCD */
-  while (i <= 320/LCD_Currentfonts->Width)
+  /* Send the string character by character on LCD */
+  while (((refcolumn + 1) & 0xFFFF) >= LCD_Currentfonts->Width)
   {
     /* Display one character on LCD */
     LCD_DisplayChar(Line, refcolumn, ' ');
-    /* Decrement the column position by deltacolumn(16) */
-    refcolumn += deltacolumn;
-    /* Increment the character counter */
-    i++;
+    /* Decrement the column position by 16 */
+    refcolumn -= LCD_Currentfonts->Width;
   }
 }
 
 
 /**
-  * @brief  Clears the hole LCD.
+  * @brief  Clears the whole LCD.
   * @param  Color: the color of the background.
   * @retval None
   */
@@ -592,11 +555,11 @@ void LCD_Clear(uint16_t Color)
 
 /**
   * @brief  Sets the cursor position.
-  * @param  Xpos: specifies the X position.
-  * @param  Ypos: specifies the Y position. 
+  * @param  Xpos: specifies the X position, can be a value from 0 to 239
+  * @param  Ypos: specifies the Y position, can be a value from 0 to 319 
   * @retval None
   */
-void LCD_SetCursor(uint8_t Xpos, uint16_t Ypos)
+void LCD_SetCursor(uint16_t Xpos, uint16_t Ypos)
 {
   if(LCDType == LCD_HX8347D)
   {
@@ -620,10 +583,10 @@ void LCD_SetCursor(uint8_t Xpos, uint16_t Ypos)
   * @param  c: pointer to the character data.
   * @retval None
   */
-void LCD_DrawChar(uint8_t Xpos, uint16_t Ypos, const uint16_t *c)
+void LCD_DrawChar(uint16_t Xpos, uint16_t Ypos, const uint16_t *c)
 {
   uint32_t index = 0, i = 0;
-  uint8_t Xaddress = 0;
+  uint16_t Xaddress = 0;
    
   Xaddress = Xpos;
   
@@ -653,15 +616,15 @@ void LCD_DrawChar(uint8_t Xpos, uint16_t Ypos, const uint16_t *c)
 
 
 /**
-  * @brief  Displays one character (16dots width, 24dots height).
+  * @brief  Displays one character.
   * @param  Line: the Line where to display the character shape .
   *   This parameter can be one of the following values:
-  *     @arg Linex: where x can be 0..9
+  *     @arg LCD_LINE_x: where x can be 0..29
   * @param  Column: start column address.
   * @param  Ascii: character ascii code, must be between 0x20 and 0x7E.
   * @retval None
   */
-void LCD_DisplayChar(uint8_t Line, uint16_t Column, uint8_t Ascii)
+void LCD_DisplayChar(uint16_t Line, uint16_t Column, uint8_t Ascii)
 {
   Ascii -= 32;
   
@@ -675,19 +638,19 @@ void LCD_DisplayChar(uint8_t Line, uint16_t Column, uint8_t Ascii)
 
 
 /**
-  * @brief  Displays a maximum of 20 char on the LCD.
+  * @brief  Displays a list of char on the LCD.
   * @param  Line: the Line where to display the character shape .
-  *   This parameter can be one of the following values:
-  *     @arg Linex: where x can be 0..9
+  *          This parameter can be one of the following values:
+  *            @arg LCD_LINE_x: where x can be 0..29
   * @param  *ptr: pointer to string to display on LCD.
   * @retval None
   */
-void LCD_DisplayStringLine(uint8_t Line, uint8_t *ptr)
+void LCD_DisplayStringLine(uint16_t Line, uint8_t *ptr)
 {
   uint16_t refcolumn = LCD_PIXEL_WIDTH - 1;
 
   /* Send the string character by character on lCD */
-  while (*ptr != 0)
+  while ((*ptr != 0) & (((refcolumn + 1) & 0xFFFF) >= LCD_Currentfonts->Width))
   {
     /* Display one character on LCD */
     LCD_DisplayChar(Line, refcolumn, *ptr);
@@ -707,7 +670,7 @@ void LCD_DisplayStringLine(uint8_t Line, uint8_t *ptr)
   * @param  Width: display window width.
   * @retval None
   */
-void LCD_SetDisplayWindow(uint8_t Xpos, uint16_t Ypos, uint8_t Height, uint16_t Width)
+void LCD_SetDisplayWindow(uint16_t Xpos, uint16_t Ypos, uint8_t Height, uint16_t Width)
 {
   if(LCDType == LCD_HX8347D)
   {    
@@ -769,14 +732,15 @@ void LCD_WindowModeDisable(void)
 
 /**
   * @brief  Displays a line.
-  * @param  Xpos: specifies the X position.
-  * @param  Ypos: specifies the Y position.
+  * @param  Xpos: specifies the X position, can be a value from 0 to 239
+  * @param  Ypos: specifies the Y position, can be a value from 0 to 319
   * @param  Length: line length.
   * @param  Direction: line direction.
-  *   This parameter can be one of the following values: Vertical or Horizontal.
+  *          This parameter can be one of the following values: 
+  *          LCD_DIR_HORIZONTAL or LCD_DIR_VERTICAL.
   * @retval None
   */
-void LCD_DrawLine(uint8_t Xpos, uint16_t Ypos, uint16_t Length, uint8_t Direction)
+void LCD_DrawLine(uint16_t Xpos, uint16_t Ypos, uint16_t Length, uint8_t Direction)
 {
   uint32_t i = 0;
   
@@ -822,13 +786,13 @@ void LCD_DrawLine(uint8_t Xpos, uint16_t Ypos, uint16_t Length, uint8_t Directio
 
 /**
   * @brief  Displays a rectangle.
-  * @param  Xpos: specifies the X position.
-  * @param  Ypos: specifies the Y position.
+  * @param  Xpos: specifies the X position, can be a value from 0 to 239
+  * @param  Ypos: specifies the Y position, can be a value from 0 to 319
   * @param  Height: display rectangle height.
   * @param  Width: display rectangle width.
   * @retval None
   */
-void LCD_DrawRect(uint8_t Xpos, uint16_t Ypos, uint8_t Height, uint16_t Width)
+void LCD_DrawRect(uint16_t Xpos, uint16_t Ypos, uint8_t Height, uint16_t Width)
 {
   LCD_DrawLine(Xpos, Ypos, Width, LCD_DIR_HORIZONTAL);
   LCD_DrawLine((Xpos + Height), Ypos, Width, LCD_DIR_HORIZONTAL);
@@ -840,12 +804,12 @@ void LCD_DrawRect(uint8_t Xpos, uint16_t Ypos, uint8_t Height, uint16_t Width)
 
 /**
   * @brief  Displays a circle.
-  * @param  Xpos: specifies the X position.
-  * @param  Ypos: specifies the Y position.
+  * @param  Xpos: specifies the X position, can be a value from 0 to 239
+  * @param  Ypos: specifies the Y position, can be a value from 0 to 319
   * @param  Radius
   * @retval None
   */
-void LCD_DrawCircle(uint8_t Xpos, uint16_t Ypos, uint16_t Radius)
+void LCD_DrawCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius)
 {
   int32_t  D;/* Decision Variable */ 
   uint32_t  CurX;/* Current X Value */
@@ -941,8 +905,8 @@ void LCD_DrawMonoPict(const uint32_t *Pict)
 
 /**
   * @brief  Displays a full rectangle.
-  * @param  Xpos: specifies the X position.
-  * @param  Ypos: specifies the Y position.
+  * @param  Xpos: specifies the X position, can be a value from 0 to 239
+  * @param  Ypos: specifies the Y position, can be a value from 0 to 319
   * @param  Height: rectangle height.
   * @param  Width: rectangle width.
   * @retval None
@@ -973,9 +937,9 @@ void LCD_DrawFullRect(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Hei
 
 /**
   * @brief  Displays a full circle.
-  * @param  Xpos: specifies the X position.
-  * @param  Ypos: specifies the Y position.
-  * @param  Radius
+  * @param  Xpos: specifies the X position, can be a value from 0 to 239
+  * @param  Ypos: specifies the Y position, can be a value from 0 to 319
+  * @param  Radius: radius of the circle.
   * @retval None
   */
 void LCD_DrawFullCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius)
@@ -1235,7 +1199,8 @@ void LCD_FillPolyLine(pPoint Points, uint16_t PointCount)
 
     for (i = 0; i < PointCount; i++) 
     {
-      if (((POLY_Y(i)<(double) pixelY) && (POLY_Y(j)>=(double) pixelY)) || ((POLY_Y(j)<(double) pixelY) && (POLY_Y(i)>=(double) pixelY))) 
+      if (((POLY_Y(i)<(double) pixelY) && (POLY_Y(j)>=(double) pixelY)) || \
+          ((POLY_Y(j)<(double) pixelY) && (POLY_Y(i)>=(double) pixelY))) 
       {
         nodeX[nodes++]=(int) (POLY_X(i)+((pixelY-POLY_Y(i))*(POLY_X(j)-POLY_X(i)))/(POLY_Y(j)-POLY_Y(i))); 
       }

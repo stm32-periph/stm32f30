@@ -2,14 +2,15 @@
   ******************************************************************************
   * @file    stm32303c_eval.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    23-October-2012
-  * @brief   This file provides: a set of firmware functions to manage Leds,
-  *          push-button and COM ports
+  * @version V1.0.2
+  * @date    04-April-2014
+  * @brief   This file provides firmware functions to manage Leds, push-buttons, 
+  *          COM ports, SD card on SPI and temperature sensor (TS751) available on 
+  *          STM32303C-EVAL evaluation board from STMicroelectronics.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2012 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -48,33 +49,11 @@
   * @{
   */ 
 
-/** @defgroup STM32303C_EVAL_LOW_LEVEL_Private_TypesDefinitions
-  * @{
-  */ 
-/**
-  * @}
-  */ 
+/* Private typedef -----------------------------------------------------------*/
+/* Private define ------------------------------------------------------------*/ 
+/* Private macros ------------------------------------------------------------*/
+/* Private variables ---------------------------------------------------------*/
 
-
-/** @defgroup STM32303C_EVAL_LOW_LEVEL_Private_Defines
-  * @{
-  */ 
-/**
-  * @}
-  */ 
-
-
-/** @defgroup STM32303C_EVAL_LOW_LEVEL_Private_Macros
-  * @{
-  */ 
-/**
-  * @}
-  */ 
-
-
-/** @defgroup STM32303C_EVAL_LOW_LEVEL_Private_Variables
-  * @{
-  */ 
 GPIO_TypeDef* GPIO_PORT[LEDn] = {LED1_GPIO_PORT, LED2_GPIO_PORT, LED3_GPIO_PORT,
                                  LED4_GPIO_PORT};
 const uint16_t GPIO_PIN[LEDn] = {LED1_PIN, LED2_PIN, LED3_PIN,
@@ -143,19 +122,8 @@ const uint8_t COM_TX_AF[COMn] = {EVAL_COM1_TX_AF};
  
 const uint8_t COM_RX_AF[COMn] = {EVAL_COM1_RX_AF};
 
-
-/**
-  * @}
-  */ 
-
-
-/** @defgroup STM32303C_EVAL_LOW_LEVEL_Private_FunctionPrototypes
-  * @{
-  */ 
-
-/**
-  * @}
-  */ 
+/* Private function prototypes -----------------------------------------------*/
+/* Private functions ---------------------------------------------------------*/
 
 /** @defgroup STM32303C_EVAL_LOW_LEVEL_Private_Functions
   * @{
@@ -256,7 +224,7 @@ void STM_EVAL_PBInit(Button_TypeDef Button, ButtonMode_TypeDef Button_Mode)
   EXTI_InitTypeDef EXTI_InitStructure;
   NVIC_InitTypeDef NVIC_InitStructure;
 
-  /* There is no Wakeup button on STM32303C_EVAL-EVAL, the Button value should
+  /* There is no Wakeup button on STM32303C-EVAL, the Button value should
      be greater than 0. */
   if(Button > 0)
   {
@@ -319,7 +287,7 @@ void STM_EVAL_PBInit(Button_TypeDef Button, ButtonMode_TypeDef Button_Mode)
   */
 uint32_t STM_EVAL_PBGetState(Button_TypeDef Button)
 {
-  /* There is no Wakeup button on STM32303C_EVAL-EVAL, the Button value should
+  /* There is no Wakeup button on STM32303C_EVAL, the Button value should
      be greater than 0. */
   if(Button > 0)
   {
@@ -385,8 +353,11 @@ void SD_LowLevel_DeInit(void)
 {
   GPIO_InitTypeDef  GPIO_InitStructure;
   
-  SPI_Cmd(SD_SPI, DISABLE); /* SD_SPI disable */
-  SPI_I2S_DeInit(SD_SPI);   /* DeInitializes the SD_SPI */
+  /* SD_SPI disable */
+  SPI_Cmd(SD_SPI, DISABLE); 
+  
+  /* DeInitializes the SD_SPI */
+  SPI_I2S_DeInit(SD_SPI);   
   
   /* SD_SPI Periph clock disable */
   RCC_APB1PeriphClockCmd(SD_SPI_CLK, DISABLE); 
@@ -415,8 +386,7 @@ void SD_LowLevel_DeInit(void)
 }
 
 /**
-  * @brief  Initializes the SD Card and put it into StandBy State (Ready for 
-  *         data transfer).
+  * @brief  Initializes the SPI and GPIOs resources used to drive the uSD card
   * @param  None
   * @retval None
   */
@@ -487,7 +457,8 @@ void SD_LowLevel_Init(void)
   
   SPI_RxFIFOThresholdConfig(SD_SPI, SPI_RxFIFOThreshold_QF);
   
-  SPI_Cmd(SD_SPI, ENABLE); /* SD_SPI enable */
+  /* SD_SPI enable */
+  SPI_Cmd(SD_SPI, ENABLE); 
 }
 
 /**
@@ -524,7 +495,7 @@ void TS751_LowLevel_DeInit(void)
 }
 
 /**
-  * @brief  Initializes the TS751_I2C..
+  * @brief  Initializes the I2C source clock and IOs used to drive the TS751
   * @param  None
   * @retval None
   */
@@ -549,7 +520,7 @@ void TS751_LowLevel_Init(void)
   /* Connect PXx to I2C_SDA */
   GPIO_PinAFConfig(TS751_I2C_SDA_GPIO_PORT, TS751_I2C_SDA_SOURCE, TS751_I2C_SDA_AF); 
 
-  /* Connect PXx to I2C_SMBUSALER */
+  /* Connect PXx to I2C_SMBUSALERT */
   GPIO_PinAFConfig(TS751_I2C_SMBUSALERT_GPIO_PORT, TS751_I2C_SMBUSALERT_SOURCE, TS751_I2C_SMBUSALERT_AF);
     
   /* Configure TS751_I2C pins: SCL */
@@ -600,7 +571,7 @@ void sEE_I2C_LowLevel_DeInit(void)
 }
 
 /**
-  * @brief  Initializes peripherals used by the I2C EEPROM driver.
+  * @brief  Initializes the I2C source clock and IOs used to drive the EEPROM.
   * @param  None
   * @retval None
   */
@@ -645,8 +616,11 @@ void sEE_SPI_LowLevel_DeInit(void)
 {
   GPIO_InitTypeDef  GPIO_InitStructure;
   
-  SPI_Cmd(sEE_SPI, DISABLE); /* sEE_SPI disable */
-  SPI_I2S_DeInit(sEE_SPI);   /* DeInitializes the sEE_SPI */
+  /* sEE_SPI disable */
+  SPI_Cmd(sEE_SPI, DISABLE); 
+  
+  /* DeInitializes the sEE_SPI */
+  SPI_I2S_DeInit(sEE_SPI);   
   
   /* sEE_SPI Periph clock disable */
   RCC_APB1PeriphClockCmd(sEE_SPI_CLK, DISABLE); 
@@ -681,7 +655,7 @@ void sEE_SPI_LowLevel_Init(void)
   SPI_InitTypeDef   SPI_InitStructure;
 
   /* sEE_CS_GPIO, sEE_MOSI_GPIO, sEE_MISO_GPIO and sEE_SCK_GPIO 
-       Periph clock enable */
+     Periph clock enable */
   RCC_AHBPeriphClockCmd(sEE_SPI_CS_GPIO_CLK | sEE_SPI_MOSI_GPIO_CLK | sEE_SPI_MISO_GPIO_CLK |
                         sEE_SPI_SCK_GPIO_CLK , ENABLE);
 
@@ -736,7 +710,8 @@ void sEE_SPI_LowLevel_Init(void)
 
   SPI_RxFIFOThresholdConfig(sEE_SPI, SPI_RxFIFOThreshold_QF);
 
-  SPI_Cmd(sEE_SPI, ENABLE); /* sEE_SPI enable */
+  /* sEE_SPI enable */
+  SPI_Cmd(sEE_SPI, ENABLE); 
 }
 
 /**

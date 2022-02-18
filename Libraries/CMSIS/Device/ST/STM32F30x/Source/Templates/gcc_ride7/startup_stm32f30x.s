@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file      startup_stm32f30x.s
   * @author    MCD Application Team
-  * @version   V1.0.0
-  * @date      04-Spetember-2012
+  * @version   V1.1.1
+  * @date      28-March-2014
   * @brief     STM32F30x Devices vector table for RIDE7 toolchain. 
   *            This module performs:
   *                - Set the initial SP
@@ -19,7 +19,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2012 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
