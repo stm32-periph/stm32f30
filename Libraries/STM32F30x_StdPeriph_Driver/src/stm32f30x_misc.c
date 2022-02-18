@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f30x_misc.c
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    04-April-2014
+  * @version V1.2.0
+  * @date    24-July-2014
   * @brief   This file provides all the miscellaneous firmware functions (add-on
   *          to CMSIS functions).
   *          

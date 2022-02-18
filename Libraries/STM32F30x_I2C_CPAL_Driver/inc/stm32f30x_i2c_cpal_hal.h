@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f30x_i2c_cpal_hal.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    04-April-2014
+  * @version V1.2.0
+  * @date    24-July-2014
   * @brief   This file contains all the functions prototypes for the CPAL_I2C_HAL
   *          firmware layer.
   ******************************************************************************
@@ -56,7 +56,7 @@ extern "C" {
 #elif defined STM32F334x8
  #define CPAL_I2C1_SUPPORTED
  #define CPAL_I2C_DEV_NUM     1
-#elif defined STM32F302x8
+#elif defined STM32F302x8 || STM32F303xE
  #define CPAL_I2C1_SUPPORTED
  #define CPAL_I2C2_SUPPORTED
  #define CPAL_I2C3_SUPPORTED

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f30x_rcc.c
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    04-April-2014
+  * @version V1.2.0
+  * @date    24-July-2014
   * @brief   This file provides firmware functions to manage the following 
   *          functionalities of the Reset and clock control (RCC) peripheral:           
   *           + Internal/external clocks, PLL, CSS and MCO configuration
@@ -909,6 +909,7 @@ void RCC_GetClocksFreq(RCC_ClocksTypeDef* RCC_Clocks)
   tmp = RCC->CFGR & RCC_CFGR_PPRE2;
   tmp = tmp >> 11;
   apb2presc = APBAHBPrescTable[tmp];
+
   /* PCLK2 clock frequency */
   RCC_Clocks->PCLK2_Frequency = RCC_Clocks->HCLK_Frequency >> apb2presc;
   
@@ -991,6 +992,36 @@ void RCC_GetClocksFreq(RCC_ClocksTypeDef* RCC_Clocks)
     RCC_Clocks->TIM1CLK_Frequency = RCC_Clocks->PCLK2_Frequency;
   }
 
+#ifdef STM32F303xE  
+  uint32_t apb1presc = 0;
+  apb1presc = APBAHBPrescTable[tmp];
+  /* TIM2CLK clock frequency */
+  if(((RCC->CFGR3 & RCC_CFGR3_TIM2SW) == RCC_CFGR3_TIM2SW)&& (RCC_Clocks->SYSCLK_Frequency == pllclk) \
+  && (apb1presc == ahbpresc)) 
+  {
+    /* TIM2 Clock is pllclk */
+    RCC_Clocks->TIM2CLK_Frequency = pllclk * 2 ;
+  }
+  else
+  {
+    /* TIM2 Clock is APB2 clock. */
+    RCC_Clocks->TIM2CLK_Frequency = RCC_Clocks->PCLK1_Frequency;
+  }
+  
+  /* TIM3CLK clock frequency */
+  if(((RCC->CFGR3 & RCC_CFGR3_TIM3SW) == RCC_CFGR3_TIM3SW)&& (RCC_Clocks->SYSCLK_Frequency == pllclk) \
+  && (apb1presc == ahbpresc)) 
+  {
+    /* TIM3 Clock is pllclk */
+    RCC_Clocks->TIM3CLK_Frequency = pllclk * 2;
+  }
+  else
+  {
+    /* TIM3 Clock is APB2 clock. */
+    RCC_Clocks->TIM3CLK_Frequency = RCC_Clocks->PCLK1_Frequency;
+  }
+#endif /* STM32F303xE */
+  
     /* TIM1CLK clock frequency */
   if(((RCC->CFGR3 & RCC_CFGR3_HRTIM1SW) == RCC_CFGR3_HRTIM1SW)&& (RCC_Clocks->SYSCLK_Frequency == pllclk) \
   && (apb2presc == ahbpresc)) 
@@ -1054,6 +1085,19 @@ void RCC_GetClocksFreq(RCC_ClocksTypeDef* RCC_Clocks)
   {
     /* TIM17 Clock is APB2 clock. */
     RCC_Clocks->TIM16CLK_Frequency = RCC_Clocks->PCLK2_Frequency;
+  }
+  
+  /* TIM20CLK clock frequency */
+  if(((RCC->CFGR3 & RCC_CFGR3_TIM20SW) == RCC_CFGR3_TIM20SW)&& (RCC_Clocks->SYSCLK_Frequency == pllclk) \
+  && (apb2presc == ahbpresc))
+  {
+    /* TIM20 Clock is 2 * pllclk */
+    RCC_Clocks->TIM20CLK_Frequency = pllclk * 2;
+  }
+  else
+  {
+    /* TIM20 Clock is APB2 clock. */
+    RCC_Clocks->TIM20CLK_Frequency = RCC_Clocks->PCLK2_Frequency;
   }
     
   /* USART1CLK clock frequency */
@@ -1305,7 +1349,7 @@ void RCC_I2CCLKConfig(uint32_t RCC_I2CCLK)
   *     @arg RCC_TIMxCLK_HCLK: TIMx clock = APB high speed clock (doubled frequency
   *          when prescaled)
   *     @arg RCC_TIMxCLK_PLLCLK: TIMx clock = PLL output (running up to 144 MHz)
-  *          (x can be 1, 8, 15, 16, 17).
+  *          (x can be 1, 8, 15, 16, 17, 20, 2, 3).
   * @retval None
   */
 void RCC_TIMCLKConfig(uint32_t RCC_TIMCLK)
@@ -1335,6 +1379,13 @@ void RCC_TIMCLKConfig(uint32_t RCC_TIMCLK)
       break;
     case 0x04:
       RCC->CFGR3 &= ~RCC_CFGR3_TIM17SW;
+      break;
+    case 0x05:
+      RCC->CFGR3 &= ~RCC_CFGR3_TIM20SW;
+    case 0x06:
+      RCC->CFGR3 &= ~RCC_CFGR3_TIM2SW;
+    case 0x07:
+      RCC->CFGR3 &= ~RCC_CFGR3_TIM3SW;
       break;
     default:
       break;
@@ -1530,8 +1581,11 @@ void RCC_BackupResetCmd(FunctionalState NewState)
   *     @arg RCC_AHBPeriph_GPIOD
   *     @arg RCC_AHBPeriph_GPIOE  
   *     @arg RCC_AHBPeriph_GPIOF
+  *     @arg RCC_AHBPeriph_GPIOG 
+  *     @arg RCC_AHBPeriph_GPIOH  
   *     @arg RCC_AHBPeriph_TS
   *     @arg RCC_AHBPeriph_CRC
+  *     @arg RCC_AHBPeriph_FMC  
   *     @arg RCC_AHBPeriph_FLITF (has effect only when the Flash memory is in power down mode)  
   *     @arg RCC_AHBPeriph_SRAM
   *     @arg RCC_AHBPeriph_DMA2
@@ -1568,12 +1622,14 @@ void RCC_AHBPeriphClockCmd(uint32_t RCC_AHBPeriph, FunctionalState NewState)
   *     @arg RCC_APB2Periph_SYSCFG
   *     @arg RCC_APB2Periph_SPI1
   *     @arg RCC_APB2Periph_USART1
+  *     @arg RCC_APB2Periph_SPI4  
   *     @arg RCC_APB2Periph_TIM15
   *     @arg RCC_APB2Periph_TIM16
   *     @arg RCC_APB2Periph_TIM17
   *     @arg RCC_APB2Periph_TIM1       
   *     @arg RCC_APB2Periph_TIM8
-  *     @arg RCC_APB2Periph_HRTIM1  
+  *     @arg RCC_APB2Periph_HRTIM1 
+  *     @arg RCC_APB2Periph_TIM20  
   * @param  NewState: new state of the specified peripheral clock.
   *         This parameter can be: ENABLE or DISABLE.
   * @retval None
@@ -1620,6 +1676,7 @@ void RCC_APB2PeriphClockCmd(uint32_t RCC_APB2Periph, FunctionalState NewState)
   *     @arg RCC_APB1Periph_PWR
   *     @arg RCC_APB1Periph_DAC1
   *     @arg RCC_APB1Periph_DAC2  
+  *     @arg RCC_APB1Periph_I2C3  
   * @param  NewState: new state of the specified peripheral clock.
   *         This parameter can be: ENABLE or DISABLE.
   * @retval None
@@ -1644,12 +1701,15 @@ void RCC_APB1PeriphClockCmd(uint32_t RCC_APB1Periph, FunctionalState NewState)
   * @brief  Forces or releases AHB peripheral reset.
   * @param  RCC_AHBPeriph: specifies the AHB peripheral to reset.
   *   This parameter can be any combination of the following values:
+  *     @arg RCC_AHBPeriph_FMC 
+  *     @arg RCC_AHBPeriph_GPIOH  
   *     @arg RCC_AHBPeriph_GPIOA
   *     @arg RCC_AHBPeriph_GPIOB
   *     @arg RCC_AHBPeriph_GPIOC  
   *     @arg RCC_AHBPeriph_GPIOD
   *     @arg RCC_AHBPeriph_GPIOE  
   *     @arg RCC_AHBPeriph_GPIOF
+  *     @arg RCC_AHBPeriph_GPIOG  
   *     @arg RCC_AHBPeriph_TS
   *     @arg RCC_AHBPeriph_ADC34
   *     @arg RCC_AHBPeriph_ADC12    
@@ -1680,11 +1740,13 @@ void RCC_AHBPeriphResetCmd(uint32_t RCC_AHBPeriph, FunctionalState NewState)
   *     @arg RCC_APB2Periph_SYSCFG
   *     @arg RCC_APB2Periph_SPI1
   *     @arg RCC_APB2Periph_USART1
+  *     @arg RCC_APB2Periph_SPI4  
   *     @arg RCC_APB2Periph_TIM15
   *     @arg RCC_APB2Periph_TIM16
   *     @arg RCC_APB2Periph_TIM17
   *     @arg RCC_APB2Periph_TIM1       
   *     @arg RCC_APB2Periph_TIM8 
+  *     @arg RCC_APB2Periph_TIM20  
   *     @arg RCC_APB2Periph_HRTIM1       
   * @param  NewState: new state of the specified peripheral reset.
   *         This parameter can be: ENABLE or DISABLE.

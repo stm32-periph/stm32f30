@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f30x_opamp.c
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    04-April-2014
+  * @version V1.2.0
+  * @date    24-July-2014
   * @brief   This file provides firmware functions to manage the following 
   *          functionalities of the operational amplifiers (OPAMP1,...OPAMP4) peripheral: 
   *           + OPAMP Configuration

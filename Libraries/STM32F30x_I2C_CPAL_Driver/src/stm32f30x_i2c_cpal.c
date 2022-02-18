@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f30x_i2c_cpal.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    04-April-2014
+  * @version V1.2.0
+  * @date    24-July-2014
   * @brief   This file provides all the CPAL firmware functions for I2C peripheral.
   ******************************************************************************
   * @attention
@@ -559,7 +559,10 @@ uint32_t CPAL_I2C_Write(CPAL_InitTypeDef* pDevInitStruct)
 
       /* Enable reload */
       CR2_tmp |= I2C_CR2_RELOAD;
-
+      
+      /* Disable error interrupt to manage error without interrupt */
+      __CPAL_I2C_HAL_DISABLE_ERRIT(pDevInitStruct->CPAL_Dev);
+      
       /* If 8 Bit register mode */
       if ((pDevInitStruct->wCPAL_Options & CPAL_OPT_16BIT_REG) == 0)
       {
@@ -572,8 +575,36 @@ uint32_t CPAL_I2C_Write(CPAL_InitTypeDef* pDevInitStruct)
         /* Generate start */
         __CPAL_I2C_HAL_START(pDevInitStruct->CPAL_Dev);
 
-        /* Wait until TXIS flag is set */
-        __CPAL_I2C_TIMEOUT(__CPAL_I2C_HAL_GET_TXIS(pDevInitStruct->CPAL_Dev), CPAL_I2C_TIMEOUT_TXIS);
+        /* Wait until TXIS flag is set or NACK is set */
+        __CPAL_I2C_TIMEOUT((__CPAL_I2C_HAL_GET_TXIS(pDevInitStruct->CPAL_Dev) || __CPAL_I2C_HAL_GET_NACK(pDevInitStruct->CPAL_Dev)), CPAL_I2C_TIMEOUT_TXIS);
+       
+        /* If acknowledge failure detected generate stop and abort communication */
+        if (__CPAL_I2C_HAL_GET_NACK(pDevInitStruct->CPAL_Dev))
+        {
+          /* Generate stop if autoend option is disabled */
+          if((CPAL_I2C_DEVICE[(pDevInitStruct->CPAL_Dev)]->CR2 & I2C_CR2_AUTOEND) != I2C_CR2_AUTOEND)
+          {
+            /* Generate stop */
+            __CPAL_I2C_HAL_STOP(pDevInitStruct->CPAL_Dev);
+          }
+          
+          /* Clear NACK flag */
+          __CPAL_I2C_HAL_CLEAR_NACK(pDevInitStruct->CPAL_Dev);
+          
+          /* Wait until STOP flag is set */
+          __CPAL_I2C_TIMEOUT(__CPAL_I2C_HAL_GET_STOP(pDevInitStruct->CPAL_Dev), CPAL_I2C_TIMEOUT_BUSY);
+          
+          /* Clear STOP flag */
+          __CPAL_I2C_HAL_CLEAR_STOP(pDevInitStruct->CPAL_Dev);
+          
+          /* Update wCPAL_DevError */
+          pDevInitStruct->wCPAL_DevError = CPAL_I2C_ERR_AF;
+          
+          /* Set CPAL_State to CPAL_STATE_ERROR */
+          pDevInitStruct->CPAL_State = CPAL_STATE_ERROR;
+                
+          return CPAL_FAIL;
+        }
 
         /* Send register address */
         __CPAL_I2C_HAL_SEND(pDevInitStruct->CPAL_Dev, (uint8_t)(pDevInitStruct->pCPAL_TransferTx->wAddr2));
@@ -591,20 +622,83 @@ uint32_t CPAL_I2C_Write(CPAL_InitTypeDef* pDevInitStruct)
         /* Generate start */
         __CPAL_I2C_HAL_START(pDevInitStruct->CPAL_Dev);
 
-        /* Wait until TXIS flag is set */
-        __CPAL_I2C_TIMEOUT(__CPAL_I2C_HAL_GET_TXIS(pDevInitStruct->CPAL_Dev), CPAL_I2C_TIMEOUT_TXIS);
+        /* Wait until TXIS flag is set or NACK is set */
+        __CPAL_I2C_TIMEOUT((__CPAL_I2C_HAL_GET_TXIS(pDevInitStruct->CPAL_Dev) || __CPAL_I2C_HAL_GET_NACK(pDevInitStruct->CPAL_Dev)), CPAL_I2C_TIMEOUT_TXIS);
+       
+        /* If acknowledge failure detected generate stop and abort communication */
+        if (__CPAL_I2C_HAL_GET_NACK(pDevInitStruct->CPAL_Dev))
+        {
+          /* Generate stop if autoend option is disabled */
+          if((CPAL_I2C_DEVICE[(pDevInitStruct->CPAL_Dev)]->CR2 & I2C_CR2_AUTOEND) != I2C_CR2_AUTOEND)
+          {
+            /* Generate stop */
+            __CPAL_I2C_HAL_STOP(pDevInitStruct->CPAL_Dev);
+          }
+          
+          /* Clear NACK flag */
+          __CPAL_I2C_HAL_CLEAR_NACK(pDevInitStruct->CPAL_Dev);
+          
+          /* Wait until STOP flag is set */
+          __CPAL_I2C_TIMEOUT(__CPAL_I2C_HAL_GET_STOP(pDevInitStruct->CPAL_Dev), CPAL_I2C_TIMEOUT_BUSY);
+          
+          /* Clear STOP flag */
+          __CPAL_I2C_HAL_CLEAR_STOP(pDevInitStruct->CPAL_Dev);
+          
+          /* Update wCPAL_DevError */
+          pDevInitStruct->wCPAL_DevError = CPAL_I2C_ERR_AF;
+          
+          /* Set CPAL_State to CPAL_STATE_ERROR */
+          pDevInitStruct->CPAL_State = CPAL_STATE_ERROR;
+                
+          return CPAL_FAIL;
+        }
 
         /* Send register address (MSB) */
         __CPAL_I2C_HAL_SEND(pDevInitStruct->CPAL_Dev, (uint8_t)(((pDevInitStruct->pCPAL_TransferTx->wAddr2)& 0xFF00) >> 8));
-
-        /* Wait until TXIS flag is set */
-        __CPAL_I2C_TIMEOUT(__CPAL_I2C_HAL_GET_TXIS(pDevInitStruct->CPAL_Dev), CPAL_I2C_TIMEOUT_TXIS);
+        
+        /* Wait until TXIS flag is set or NACK is set */
+        __CPAL_I2C_TIMEOUT((__CPAL_I2C_HAL_GET_TXIS(pDevInitStruct->CPAL_Dev) || __CPAL_I2C_HAL_GET_NACK(pDevInitStruct->CPAL_Dev)), CPAL_I2C_TIMEOUT_TXIS);
+       
+        /* If acknowledge failure detected generate stop and abort communication */
+        if (__CPAL_I2C_HAL_GET_NACK(pDevInitStruct->CPAL_Dev))
+        {
+          /* Generate stop if autoend option is disabled */
+          if((CPAL_I2C_DEVICE[(pDevInitStruct->CPAL_Dev)]->CR2 & I2C_CR2_AUTOEND) != I2C_CR2_AUTOEND)
+          {
+            /* Generate stop */
+            __CPAL_I2C_HAL_STOP(pDevInitStruct->CPAL_Dev);
+          }
+          
+          /* Clear NACK flag */
+          __CPAL_I2C_HAL_CLEAR_NACK(pDevInitStruct->CPAL_Dev);
+          
+          /* Wait until STOP flag is set */
+          __CPAL_I2C_TIMEOUT(__CPAL_I2C_HAL_GET_STOP(pDevInitStruct->CPAL_Dev), CPAL_I2C_TIMEOUT_BUSY);
+          
+          /* Clear STOP flag */
+          __CPAL_I2C_HAL_CLEAR_STOP(pDevInitStruct->CPAL_Dev);
+          
+          /* Update wCPAL_DevError */
+          pDevInitStruct->wCPAL_DevError = CPAL_I2C_ERR_AF;
+          
+          /* Set CPAL_State to CPAL_STATE_ERROR */
+          pDevInitStruct->CPAL_State = CPAL_STATE_ERROR;
+                
+          return CPAL_FAIL;
+        }
 
         /* Send register address (LSB) */
         __CPAL_I2C_HAL_SEND(pDevInitStruct->CPAL_Dev, (uint8_t)((pDevInitStruct->pCPAL_TransferTx->wAddr2)& 0x00FF));
       }
     #endif /* CPAL_16BIT_REG_OPTION */
 
+      /* If I2C ERR Interrupt Option Bit not selected */
+      if ((pDevInitStruct->wCPAL_Options & CPAL_OPT_I2C_ERRIT_DISABLE) == 0)
+      {            
+        /* Enable I2C Error Interrupts */
+        __CPAL_I2C_HAL_ENABLE_ERRIT(pDevInitStruct->CPAL_Dev);
+      }
+      
       /* Wait until TCR flag is set */
       __CPAL_I2C_TIMEOUT(__CPAL_I2C_HAL_GET_TCR(pDevInitStruct->CPAL_Dev), CPAL_I2C_TIMEOUT_TCR);
 
@@ -840,6 +934,9 @@ uint32_t CPAL_I2C_Read(CPAL_InitTypeDef* pDevInitStruct)
     {
       CPAL_LOG("\n\rLOG : I2C Device Master Mem Addr Mode");
 
+      /* Disable error interrupt to manage error without interrupt */
+      __CPAL_I2C_HAL_DISABLE_ERRIT(pDevInitStruct->CPAL_Dev);
+      
       /* If 8 Bit register mode */
       if ((pDevInitStruct->wCPAL_Options & CPAL_OPT_16BIT_REG) == 0)
       {
@@ -852,9 +949,37 @@ uint32_t CPAL_I2C_Read(CPAL_InitTypeDef* pDevInitStruct)
         /* Generate start */
         __CPAL_I2C_HAL_START(pDevInitStruct->CPAL_Dev);
 
-        /* Wait until TXIS flag is set */
-        __CPAL_I2C_TIMEOUT(__CPAL_I2C_HAL_GET_TXIS(pDevInitStruct->CPAL_Dev), CPAL_I2C_TIMEOUT_TXIS);
-
+         /* Wait until TXIS flag is set or NACK is set */
+        __CPAL_I2C_TIMEOUT((__CPAL_I2C_HAL_GET_TXIS(pDevInitStruct->CPAL_Dev) || __CPAL_I2C_HAL_GET_NACK(pDevInitStruct->CPAL_Dev)), CPAL_I2C_TIMEOUT_TXIS);
+       
+        /* If acknowledge failure detected generate stop and abort communication */
+        if (__CPAL_I2C_HAL_GET_NACK(pDevInitStruct->CPAL_Dev))
+        {
+          /* Generate stop if autoend option is disabled */
+          if((CPAL_I2C_DEVICE[(pDevInitStruct->CPAL_Dev)]->CR2 & I2C_CR2_AUTOEND) != I2C_CR2_AUTOEND)
+          {
+            /* Generate stop */
+            __CPAL_I2C_HAL_STOP(pDevInitStruct->CPAL_Dev);
+          }
+          
+          /* Clear NACK flag */
+          __CPAL_I2C_HAL_CLEAR_NACK(pDevInitStruct->CPAL_Dev);
+          
+          /* Wait until STOP flag is set */
+          __CPAL_I2C_TIMEOUT(__CPAL_I2C_HAL_GET_STOP(pDevInitStruct->CPAL_Dev), CPAL_I2C_TIMEOUT_BUSY);
+          
+          /* Clear STOP flag */
+          __CPAL_I2C_HAL_CLEAR_STOP(pDevInitStruct->CPAL_Dev);
+          
+          /* Update wCPAL_DevError */
+          pDevInitStruct->wCPAL_DevError = CPAL_I2C_ERR_AF;
+          
+          /* Set CPAL_State to CPAL_STATE_ERROR */
+          pDevInitStruct->CPAL_State = CPAL_STATE_ERROR;
+                
+          return CPAL_FAIL;
+        }
+        
         /* Send register address */
         __CPAL_I2C_HAL_SEND(pDevInitStruct->CPAL_Dev, (uint8_t)(pDevInitStruct->pCPAL_TransferRx->wAddr2));
       }
@@ -871,20 +996,82 @@ uint32_t CPAL_I2C_Read(CPAL_InitTypeDef* pDevInitStruct)
         /* Generate start */
         __CPAL_I2C_HAL_START(pDevInitStruct->CPAL_Dev);
 
-        /* Wait until TXIS flag is set */
-        __CPAL_I2C_TIMEOUT(__CPAL_I2C_HAL_GET_TXIS(pDevInitStruct->CPAL_Dev), CPAL_I2C_TIMEOUT_TXIS);
+   /* Wait until TXIS flag is set or NACK is set */
+        __CPAL_I2C_TIMEOUT((__CPAL_I2C_HAL_GET_TXIS(pDevInitStruct->CPAL_Dev) || __CPAL_I2C_HAL_GET_NACK(pDevInitStruct->CPAL_Dev)), CPAL_I2C_TIMEOUT_TXIS);
+       
+        /* If acknowledge failure detected generate stop and abort communication */
+        if (__CPAL_I2C_HAL_GET_NACK(pDevInitStruct->CPAL_Dev))
+        {
+          /* Generate stop if autoend option is disabled */
+          if((CPAL_I2C_DEVICE[(pDevInitStruct->CPAL_Dev)]->CR2 & I2C_CR2_AUTOEND) != I2C_CR2_AUTOEND)
+          {
+            /* Generate stop */
+            __CPAL_I2C_HAL_STOP(pDevInitStruct->CPAL_Dev);
+          }
+          
+          /* Clear NACK flag */
+          __CPAL_I2C_HAL_CLEAR_NACK(pDevInitStruct->CPAL_Dev);
+          
+          /* Wait until STOP flag is set */
+          __CPAL_I2C_TIMEOUT(__CPAL_I2C_HAL_GET_STOP(pDevInitStruct->CPAL_Dev), CPAL_I2C_TIMEOUT_BUSY);
+          
+          /* Clear STOP flag */
+          __CPAL_I2C_HAL_CLEAR_STOP(pDevInitStruct->CPAL_Dev);
+          
+          /* Update wCPAL_DevError */
+          pDevInitStruct->wCPAL_DevError = CPAL_I2C_ERR_AF;
+          
+          /* Set CPAL_State to CPAL_STATE_ERROR */
+          pDevInitStruct->CPAL_State = CPAL_STATE_ERROR;
+                
+          return CPAL_FAIL;
+        }
 
         /* Send register address (MSB) */
         __CPAL_I2C_HAL_SEND(pDevInitStruct->CPAL_Dev, (uint8_t)(((pDevInitStruct->pCPAL_TransferRx->wAddr2)& 0xFF00) >> 8));
 
-        /* Wait until TXIS flag is set */
-        __CPAL_I2C_TIMEOUT(__CPAL_I2C_HAL_GET_TXIS(pDevInitStruct->CPAL_Dev), CPAL_I2C_TIMEOUT_TXIS);
-
+       /* Wait until TXIS flag is set or NACK is set */
+        __CPAL_I2C_TIMEOUT((__CPAL_I2C_HAL_GET_TXIS(pDevInitStruct->CPAL_Dev) || __CPAL_I2C_HAL_GET_NACK(pDevInitStruct->CPAL_Dev)), CPAL_I2C_TIMEOUT_TXIS);
+       
+        /* If acknowledge failure detected generate stop and abort communication */
+        if (__CPAL_I2C_HAL_GET_NACK(pDevInitStruct->CPAL_Dev))
+        {
+          /* Generate stop if autoend option is disabled */
+          if((CPAL_I2C_DEVICE[(pDevInitStruct->CPAL_Dev)]->CR2 & I2C_CR2_AUTOEND) != I2C_CR2_AUTOEND)
+          {
+            /* Generate stop */
+            __CPAL_I2C_HAL_STOP(pDevInitStruct->CPAL_Dev);
+          }
+          
+          /* Clear NACK flag */
+          __CPAL_I2C_HAL_CLEAR_NACK(pDevInitStruct->CPAL_Dev);
+          
+          /* Wait until STOP flag is set */
+          __CPAL_I2C_TIMEOUT(__CPAL_I2C_HAL_GET_STOP(pDevInitStruct->CPAL_Dev), CPAL_I2C_TIMEOUT_BUSY);
+          
+          /* Clear STOP flag */
+          __CPAL_I2C_HAL_CLEAR_STOP(pDevInitStruct->CPAL_Dev);
+          
+          /* Update wCPAL_DevError */
+          pDevInitStruct->wCPAL_DevError = CPAL_I2C_ERR_AF;
+          
+          /* Set CPAL_State to CPAL_STATE_ERROR */
+          pDevInitStruct->CPAL_State = CPAL_STATE_ERROR;
+                
+          return CPAL_FAIL;
+        }
+        
         /* Send register address (LSB) */
         __CPAL_I2C_HAL_SEND(pDevInitStruct->CPAL_Dev, (uint8_t)((pDevInitStruct->pCPAL_TransferRx->wAddr2)& 0x00FF));
       }
     #endif /* CPAL_16BIT_REG_OPTION */
-
+      
+      /* If I2C ERR Interrupt Option Bit not selected */
+      if ((pDevInitStruct->wCPAL_Options & CPAL_OPT_I2C_ERRIT_DISABLE) == 0)
+      {            
+        /* Enable I2C Error Interrupts */
+        __CPAL_I2C_HAL_ENABLE_ERRIT(pDevInitStruct->CPAL_Dev);
+      }
       /* Wait until TC flag is set */
       __CPAL_I2C_TIMEOUT(__CPAL_I2C_HAL_GET_TC(pDevInitStruct->CPAL_Dev), CPAL_I2C_TIMEOUT_TC);
 

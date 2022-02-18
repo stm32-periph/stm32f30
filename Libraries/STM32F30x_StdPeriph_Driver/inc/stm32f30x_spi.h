@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f30x_spi.h
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    04-April-2014
+  * @version V1.2.0
+  * @date    24-July-2014
   * @brief   This file contains all the functions prototypes for the SPI 
   *          firmware library.
   ******************************************************************************
@@ -118,11 +118,13 @@ typedef struct
 
 #define IS_SPI_ALL_PERIPH(PERIPH) (((PERIPH) == SPI1) || \
                                    ((PERIPH) == SPI2) || \
-                                   ((PERIPH) == SPI3))
+                                   ((PERIPH) == SPI3) || \
+                                   ((PERIPH) == SPI4))
 
 #define IS_SPI_ALL_PERIPH_EXT(PERIPH) (((PERIPH) == SPI1) || \
                                        ((PERIPH) == SPI2) || \
                                        ((PERIPH) == SPI3) || \
+                                       ((PERIPH) == SPI4) || \
                                        ((PERIPH) == I2S2ext) || \
                                        ((PERIPH) == I2S3ext))
 

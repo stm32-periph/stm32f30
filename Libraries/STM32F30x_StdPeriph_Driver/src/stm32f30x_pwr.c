@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f30x_pwr.c
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    04-April-2014
+  * @version V1.2.0
+  * @date    24-July-2014
   * @brief   This file provides firmware functions to manage the following 
   *          functionalities of the Power Controller (PWR) peripheral:           
   *           + Backup Domain Access
@@ -365,6 +365,8 @@ void PWR_EnterSleepMode(uint8_t PWR_SLEEPEntry)
   else
   {
     /* Request Wait For Event */
+    __SEV();
+    __WFE(); 
     __WFE();
   }
 }
@@ -431,15 +433,13 @@ void PWR_EnterSTOPMode(uint32_t PWR_Regulator, uint8_t PWR_STOPEntry)
   * @note     Reset pad (still available) 
   * @note     RTC_AF1 pin (PC13) if configured for Wakeup pin 2 (WKUP2), tamper, 
   *           time-stamp, RTC Alarm out, or RTC clock calibration out.
-  * @note     WKUP pin 1 (PA0) and WKUP pin 3 (PE6), if enabled.       
+  * @note     WKUP pin 1 (PA0) and WKUP pin 3 (PE6), if enabled.    
+  * @note The Wakeup flag (WUF) need to be cleared at application level before to call this function.        
   * @param  None
   * @retval None
   */
 void PWR_EnterSTANDBYMode(void)
 {
-  /* Clear Wakeup flag */
-  PWR->CR |= PWR_CR_CWUF;
-  
   /* Select STANDBY mode */
   PWR->CR |= PWR_CR_PDDS;
   

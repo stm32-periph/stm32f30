@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f30x_syscfg.c
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    04-April-2014
+  * @version V1.2.0
+  * @date    24-July-2014
   * @brief   This file provides firmware functions to manage the following 
   *          functionalities of the SYSCFG peripheral:
   *           + Remapping the memory mapped at 0x00000000  
@@ -122,6 +122,8 @@ void SYSCFG_DeInit(void)
   SYSCFG->CFGR2 = 0;
   /* Set CFGR3 register to reset value */
   SYSCFG->CFGR3 = 0;
+  /* Set CFGR4 register to reset value */
+  SYSCFG->CFGR4 = 0;
 }
 
 /**
@@ -131,6 +133,7 @@ void SYSCFG_DeInit(void)
   *     @arg SYSCFG_MemoryRemap_Flash: Main Flash memory mapped at 0x00000000  
   *     @arg SYSCFG_MemoryRemap_SystemMemory: System Flash memory mapped at 0x00000000
   *     @arg SYSCFG_MemoryRemap_SRAM: Embedded SRAM mapped at 0x00000000
+  *     @arg SYSCFG_MemoryRemap_FMC: External memory through FMC   
   * @retval None
   */
 void SYSCFG_MemoryRemapConfig(uint32_t SYSCFG_MemoryRemap)
@@ -328,6 +331,7 @@ void SYSCFG_USBInterruptLineRemapCmd(FunctionalState NewState)
   *     @arg SYSCFG_I2CFastModePlus_PB9: Configure fast mode plus driving capability for PB9
   *     @arg SYSCFG_I2CFastModePlus_I2C1: Configure fast mode plus driving capability for I2C1 pins
   *     @arg SYSCFG_I2CFastModePlus_I2C2: Configure fast mode plus driving capability for I2C2 pins
+  *     @arg SYSCFG_I2CFastModePlus_I2C3: Configure fast mode plus driving capability for I2C3 pins  
   * @param  NewState: new state of the DMA channel remapping. 
   *         This parameter can be:
   *     @arg ENABLE: Enable fast mode plus driving capability for selected I2C pin
@@ -394,7 +398,7 @@ void SYSCFG_ITConfig(uint32_t SYSCFG_IT, FunctionalState NewState)
 /**
   * @brief  Selects the GPIO pin used as EXTI Line.
   * @param  EXTI_PortSourceGPIOx : selects the GPIO port to be used as source 
-  *                                for EXTI lines where x can be (A, B, C, D, E or F).
+  *                                for EXTI lines where x can be (A, B, C, D, E, F, G, H).
   * @param  EXTI_PinSourcex: specifies the EXTI line to be configured.
   *         This parameter can be EXTI_PinSourcex where x can be (0..15)
   * @retval None
@@ -442,6 +446,48 @@ void SYSCFG_BypassParityCheckDisable(void)
 {
   /* Disable the adddress parity check on RAM */
   *(__IO uint32_t *) CFGR1_BYPADDRPAR_BB = (uint32_t)0x00000001;
+}
+
+/**
+  * @brief  Configures the remapping capabilities of DAC/TIM triggers.
+  * @param  SYSCFG_ADCTriggerRemap: selects the ADC trigger to be remapped.
+  *   This parameter can be one of the following values: 
+  *     @arg REMAPADCTRIGGER_ADC12_EXT2: Input trigger of ADC12 regular channel EXT2
+  *     @arg REMAPADCTRIGGER_ADC12_EXT3: Input trigger of ADC12 regular channel EXT3
+  *     @arg REMAPADCTRIGGER_ADC12_EXT5: Input trigger of ADC12 regular channel EXT5
+  *     @arg REMAPADCTRIGGER_ADC12_EXT13: Input trigger of ADC12 regular channel EXT13
+  *     @arg REMAPADCTRIGGER_ADC12_EXT15: Input trigger of ADC12 regular channel EXT15
+  *     @arg REMAPADCTRIGGER_ADC12_JEXT3: Input trigger of ADC12 injected channel JEXT3
+  *     @arg REMAPADCTRIGGER_ADC12_JEXT6: Input trigger of ADC12 injected channel JEXT6
+  *     @arg REMAPADCTRIGGER_ADC12_JEXT13: Input trigger of ADC12 injected channel JEXT16
+  *     @arg REMAPADCTRIGGER_ADC34_EXT5: Input trigger of ADC34 regular channel EXT5
+  *     @arg REMAPADCTRIGGER_ADC34_EXT6: Input trigger of ADC34 regular channel EXT6
+  *     @arg REMAPADCTRIGGER_ADC34_EXT15: Input trigger of ADC34 regular channel EXT15
+  *     @arg REMAPADCTRIGGER_ADC34_JEXT5: Input trigger of ADC34 injected channel JEXT5
+  *     @arg REMAPADCTRIGGER_ADC34_JEXT11: Input trigger of ADC34 injected channel JEXT11
+  *     @arg REMAPADCTRIGGER_ADC34_JEXT14: Input trigger of ADC34 injected channel JEXT14  
+  * @param  NewState: new state of the trigger mapping. 
+  *         This parameter can be: ENABLE or DISABLE.
+  * @note   ENABLE:  Enable fast mode plus driving capability for selected pin
+  * @note   DISABLE: Disable fast mode plus driving capability for selected pin
+  * @retval None
+  */
+void SYSCFG_ADCTriggerRemapConfig(uint32_t SYSCFG_ADCTriggerRemap, FunctionalState NewState)
+{
+  /* Check the parameters */
+  assert_param(IS_SYSCFG_ADC_TRIGGER_REMAP(SYSCFG_ADCTriggerRemap));
+  assert_param(IS_FUNCTIONAL_STATE(NewState));
+  
+  if (NewState != DISABLE)
+  {
+    /* Remap the trigger */
+    SYSCFG->CFGR4 |= (uint32_t)SYSCFG_ADCTriggerRemap;
+  }
+  else
+  {
+    /* Use the default trigger mapping */
+    SYSCFG->CFGR4 &= (uint32_t)(~SYSCFG_ADCTriggerRemap);
+  }
 }
 
 /**

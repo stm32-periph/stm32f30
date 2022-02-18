@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FLASH/FLASH_WriteProtection/main.c 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    04-April-2014
+  * @version V1.1.0
+  * @date    24-July-2014
   * @brief   Main program body
   ******************************************************************************
   * @attention
@@ -39,11 +39,19 @@
 /* Private typedef -----------------------------------------------------------*/
 typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 /* Private define ------------------------------------------------------------*/
+#ifdef STM32F303xE
+#define FLASH_PAGE_SIZE    ((uint16_t)0x800)
+#define FLASH_PAGES_TO_BE_PROTECTED (OB_WRP_Pages24to25 | OB_WRP_Pages26to27 | OB_WRP_Pages60to61 | OB_WRP_Pages62to263)  
+
+#define BANK1_WRITE_START_ADDR  ((uint32_t)0x08006000)
+#define BANK1_WRITE_END_ADDR    ((uint32_t)0x08080000)
+#else
 #define FLASH_PAGE_SIZE    ((uint16_t)0x400)
 #define FLASH_PAGES_TO_BE_PROTECTED (OB_WRP_Pages24to25 | OB_WRP_Pages26to27)  
 
 #define BANK1_WRITE_START_ADDR  ((uint32_t)0x08006000)
 #define BANK1_WRITE_END_ADDR    ((uint32_t)0x08008000)
+#endif /* STM32F303xE */
  
 /* Uncomment this line to program the Flash pages */
 #define FLASH_PAGE_PROGRAM
@@ -52,7 +60,7 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 //#define WRITE_PROTECTION_ENABLE
 
 /* Uncomment this line to Disable Write Protection */
-#define WRITE_PROTECTION_DISABLE
+//#define WRITE_PROTECTION_DISABLE
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/

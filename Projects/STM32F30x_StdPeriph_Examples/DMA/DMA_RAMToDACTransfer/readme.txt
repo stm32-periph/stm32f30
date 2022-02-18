@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    DMA/DMA_RAMToDACTransfer/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    04-April-2014
+  * @version V1.1.0
+  * @date    24-July-2014
   * @brief   Description of the DMA RAM to DAC example.
   ******************************************************************************
   *

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    system_stm32f30x.h
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    28-March-2014
+  * @version V1.2.0
+  * @date    24-July-2014
   * @brief   CMSIS Cortex-M4 Device System Source File for STM32F30x devices.  
   ******************************************************************************
   * @attention

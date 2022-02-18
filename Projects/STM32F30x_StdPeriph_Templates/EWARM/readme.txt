@@ -5,8 +5,8 @@
   ******************* (C) COPYRIGHT 2014 STMicroelectronics ********************
   * @file    readme.txt
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    04-April-2014
+  * @version V1.2.0
+  * @date    24-July-2014
   * @brief   This sub-directory contains all the user-modifiable files needed to
   *          create a new project linked with the STM32F30x Standard Peripherals 
   *          Library and working with IAR Embedded Workbench for ARM (EWARM)
@@ -64,6 +64,15 @@
                          Stack and Heap)in internal SRAM.
                          You can customize this file to your need.
 
+ - stm32f303xe_flash.icf : This file is the IAR Linker configuration file used to 
+                         place program code (readonly) in internal FLASH and data
+                         (readwrite, Stack and Heap)in internal SRAM. 
+                         You can customize this file to your need.     
+
+ - stm32f303xe_ram.icf   : STM32F303xE devices  Linker configuration file 
+                         used to place program code (readonly) and data (readwrite,
+                         Stack and Heap)in internal SRAM.
+                         You can customize this file to your need.                                                                           
                              
  @par How to use it ?
 
@@ -73,11 +82,14 @@
                     You can use STMicroelectronics STM32303C-EVAL board to run this project.
                   
      - STM32F334x8: to configure the project for STM32F334x8 devices.
-                    You need to use custom HW board to run this project.
+                    You can use STMicroelectronics Discovery to run this project.
     
     - STM32F302x8: to configure the project for STM32F302x8 devices.
+                   You can use STMicroelectronics Nucleo HW to run this project.
+         
+    - STM32F303xE: to configure the project for STM32F303xE devices.
                     You need to use custom HW board to run this project.
-
+                    
      @note The needed define symbols for this config are already declared in the
            preprocessor section: STM32F3XXX, USE_STDPERIPH_DRIVER
            

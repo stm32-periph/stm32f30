@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    PWR/PWR_CurrentConsumption/stm32f30x_lp_modes.c 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    04-April-2014
+  * @version V1.1.0
+  * @date    24-July-2014
   * @brief   This file provides firmware functions to manage the following 
   *          functionalities of the STM32F30x Low Power Modes:
   *           - Sleep Mode
@@ -256,15 +256,14 @@ void StopMode_Measure(void)
   */
 void StandbyMode_Measure(void)
 {
-  /* Check if the StandBy flag is set */
-  if (PWR_GetFlagStatus(PWR_FLAG_SB) != RESET)
-  {       
-    /* Clear StandBy flag */
-    PWR_ClearFlag(PWR_FLAG_SB);
-  }
-  /* Enable WKUP pin 2 */
+  /* Disable wake-up source(Wake up pin) to guarantee free access to WUT level-OR input */ 
+  PWR_WakeUpPinCmd(PWR_WakeUpPin_2, DISABLE);  
+  /* Clear Wake-up flag */
+  PWR_ClearFlag(PWR_FLAG_WU);
+  PWR_ClearFlag(PWR_FLAG_SB);
+  /* Enable WKUP pin 1 */
   PWR_WakeUpPinCmd(PWR_WakeUpPin_2,ENABLE);
-
+  
   /* Request to enter STANDBY mode (Wake Up flag is cleared in PWR_EnterSTANDBYMode function) */
   PWR_EnterSTANDBYMode();
   
@@ -327,10 +326,7 @@ void StandbyRTCMode_Measure(void)
   RTC_AlarmStructure.RTC_AlarmDateWeekDaySel = RTC_AlarmDateWeekDaySel_Date;
   RTC_AlarmStructure.RTC_AlarmMask = RTC_AlarmMask_DateWeekDay;
   RTC_SetAlarm(RTC_Format_BCD, RTC_Alarm_A, &RTC_AlarmStructure);
-  
-  /* Enable RTC Alarm A Interrupt */
-  RTC_ITConfig(RTC_IT_ALRA, ENABLE);
-  
+    
   /* Enable the alarm */
   RTC_AlarmCmd(RTC_Alarm_A, ENABLE);
   
@@ -341,11 +337,17 @@ void StandbyRTCMode_Measure(void)
   RTC_TimeStructure.RTC_Seconds = 0x00;  
   
   RTC_SetTime(RTC_Format_BCD, &RTC_TimeStructure);
-    
-  /* Clear Wakeup flag */
-  PWR_ClearFlag(PWR_FLAG_WU);      
+     
+  /* Disable RTC Alarm A Interrupt */
+  RTC_ITConfig(RTC_IT_ALRA, DISABLE);   
   
-  RTC_ClearFlag(RTC_FLAG_ALRAF);
+  /* Clear Wakeup flag */
+  PWR_ClearFlag(PWR_FLAG_WU);  
+  
+  /* Enable RTC Alarm A Interrupt */
+  RTC_ITConfig(RTC_IT_ALRA, ENABLE); 
+  
+//  RTC_ClearFlag(RTC_FLAG_ALRAF);
   
   /* Request to enter STANDBY mode (Wake Up flag is cleared in PWR_EnterSTANDBYMode function) */
   PWR_EnterSTANDBYMode();

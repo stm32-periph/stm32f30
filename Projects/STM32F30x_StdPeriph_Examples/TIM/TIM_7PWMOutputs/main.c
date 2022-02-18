@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_7PWMOutputs/main.c  
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    04-April-2014
+  * @version V1.1.0
+  * @date    24-July-2014
   * @brief   Main program body
   ******************************************************************************
   * @attention

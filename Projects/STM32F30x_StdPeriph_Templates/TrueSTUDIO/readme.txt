@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    readme.txt
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    04-April-2014
+  * @version V1.2.0
+  * @date    24-July-2014
   * @brief   This sub-directory contains all the user-modifiable files needed to
   *          create a new project linked with the STM32F30x Standard Peripherals
   *          Library and working with TrueSTUDIO software toolchain.
@@ -48,6 +48,7 @@
    - STM32F303xC: to configure the project for STM32F303xC devices.
    - STM32F302x8: to configure the project for STM32F302x8 devices.
    - STM32F334x8: to configure the project for STM32F334x8 devices.
+   - STM32F303xE: to configure the project for STM32F303xE devices.
  - Rebuild all project files: Select the project in the "Project explorer" 
    window then click on Project->build project menu.
  - Run program: Select the project in the "Project explorer" window then click 

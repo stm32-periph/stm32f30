@@ -137,6 +137,11 @@
 			<locationURI>PARENT-4-PROJECT_LOC/Libraries/STM32F30x_StdPeriph_Driver/src/stm32f30x_flash.c</locationURI>
 		</link>
 		<link>
+			<name>STM32F30x_StdPeriph_Driver/stm32f30x_fmc.c</name>
+			<type>1</type>
+			<locationURI>PARENT-4-PROJECT_LOC/Libraries/STM32F30x_StdPeriph_Driver/src/stm32f30x_fmc.c</locationURI>
+		</link>
+		<link>
 			<name>STM32F30x_StdPeriph_Driver/stm32f30x_gpio.c</name>
 			<type>1</type>
 			<locationURI>PARENT-4-PROJECT_LOC/Libraries/STM32F30x_StdPeriph_Driver/src/stm32f30x_gpio.c</locationURI>
@@ -215,6 +220,11 @@
 			<name>TrueSTUDIO/startup_stm32f303xc.s</name>
 			<type>1</type>
 			<locationURI>PARENT-4-PROJECT_LOC/Libraries/CMSIS/Device/ST/STM32F30x/Source/Templates/TrueSTUDIO/startup_stm32f303xc.s</locationURI>
+		</link>
+		<link>
+			<name>TrueSTUDIO/startup_stm32f303xe.s</name>
+			<type>1</type>
+			<locationURI>PARENT-4-PROJECT_LOC/Libraries/CMSIS/Device/ST/STM32F30x/Source/Templates/TrueSTUDIO/startup_stm32f303xe.s</locationURI>
 		</link>
 		<link>
 			<name>TrueSTUDIO/startup_stm32f334x8.s</name>

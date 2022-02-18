@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FLASH/FLASH_Program/main.c  
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    04-April-2014
+  * @version V1.1.0
+  * @date    24-July-2014
   * @brief   Main program body
   ******************************************************************************
   * @attention
@@ -41,7 +41,11 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 /* Private define ------------------------------------------------------------*/
 #define FLASH_PAGE_SIZE         ((uint32_t)0x00000800)   /* FLASH Page Size */
 #define FLASH_USER_START_ADDR   ((uint32_t)0x08006000)   /* Start @ of user Flash area */
+#ifdef STM32F303xE
+#define FLASH_USER_END_ADDR     ((uint32_t)0x08080000)   /* End @ of user Flash area */
+#else
 #define FLASH_USER_END_ADDR     ((uint32_t)0x08007000)   /* End @ of user Flash area */
+#endif
 #define DATA_32                 ((uint32_t)0x12345678)
 
 /* Private macro -------------------------------------------------------------*/

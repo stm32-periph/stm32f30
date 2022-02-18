@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    PWR/PWR_Standby/main.c 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    04-April-2014
+  * @version V1.1.0
+  * @date    24-July-2014
   * @brief   Main program body
   ******************************************************************************
   * @attention
@@ -107,8 +107,14 @@ static void RTC_Config(void)
   /* Allow access to Backup Domain */
   PWR_BackupAccessCmd(ENABLE);
   
+  /* Disable wake-up source(ALARM) to guarantee free access to WUT level-OR input */
+  RTC_ITConfig(RTC_IT_ALRA, DISABLE);
+
   /* Clear Wakeup flag */
   PWR_ClearFlag(PWR_FLAG_WU);
+
+  /* Enable wake-up source(ALARM) to guarantee free access to WUT level-OR input */
+  RTC_ITConfig(RTC_IT_ALRA, ENABLE);
 
   /* Enable the LSI OSC */
   RCC_LSICmd(ENABLE);

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f30x_rcc.h
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    04-April-2014
+  * @version V1.2.0
+  * @date    24-July-2014
   * @brief   This file contains all the functions prototypes for the RCC 
   *          firmware library.
   ******************************************************************************
@@ -61,6 +61,8 @@ typedef struct
   uint32_t TIM1CLK_Frequency;
   uint32_t HRTIM1CLK_Frequency;
   uint32_t TIM8CLK_Frequency;
+  uint32_t TIM2CLK_Frequency;
+  uint32_t TIM3CLK_Frequency;
   uint32_t USART1CLK_Frequency;
   uint32_t USART2CLK_Frequency;
   uint32_t USART3CLK_Frequency;
@@ -69,6 +71,7 @@ typedef struct
   uint32_t TIM15CLK_Frequency;
   uint32_t TIM16CLK_Frequency;
   uint32_t TIM17CLK_Frequency;  
+  uint32_t TIM20CLK_Frequency; 
 }RCC_ClocksTypeDef;
 
 /* Exported constants --------------------------------------------------------*/
@@ -290,11 +293,23 @@ typedef struct
 #define RCC_TIM17CLK_HCLK                  ((uint32_t)0x40000000)
 #define RCC_TIM17CLK_PLLCLK                ((uint32_t)0x40002000)
 
+#define RCC_TIM20CLK_HCLK                  ((uint32_t)0x50000000)
+#define RCC_TIM20CLK_PLLCLK                ((uint32_t)0x50008000)
+
+#define RCC_TIM2CLK_HCLK                  ((uint32_t)0x60000000)
+#define RCC_TIM2CLK_PLLCLK                ((uint32_t)0x61000000)
+
+#define RCC_TIM3CLK_HCLK                  ((uint32_t)0x70000000)
+#define RCC_TIM3CLK_PLLCLK                ((uint32_t)0x72000000)
+
 #define IS_RCC_TIMCLK(TIMCLK) (((TIMCLK) == RCC_TIM1CLK_HCLK) || ((TIMCLK) == RCC_TIM1CLK_PLLCLK) || \
                                ((TIMCLK) == RCC_TIM8CLK_HCLK) || ((TIMCLK) == RCC_TIM8CLK_PLLCLK) || \
                                ((TIMCLK) == RCC_TIM15CLK_HCLK) || ((TIMCLK) == RCC_TIM15CLK_PLLCLK) || \
                                ((TIMCLK) == RCC_TIM16CLK_HCLK) || ((TIMCLK) == RCC_TIM16CLK_PLLCLK) || \
-                               ((TIMCLK) == RCC_TIM17CLK_HCLK) || ((TIMCLK) == RCC_TIM17CLK_PLLCLK))
+                               ((TIMCLK) == RCC_TIM17CLK_HCLK) || ((TIMCLK) == RCC_TIM17CLK_PLLCLK)|| \
+                               ((TIMCLK) == RCC_TIM20CLK_HCLK) || ((TIMCLK) == RCC_TIM20CLK_PLLCLK)|| \
+                               ((TIMCLK) == RCC_TIM2CLK_HCLK) || ((TIMCLK) == RCC_TIM2CLK_PLLCLK)|| \
+                               ((TIMCLK) == RCC_TIM3CLK_HCLK) || ((TIMCLK) == RCC_TIM3CLK_PLLCLK))
 
 /**
   * @}
@@ -464,15 +479,18 @@ typedef struct
 #define RCC_AHBPeriph_GPIOD               RCC_AHBENR_GPIODEN
 #define RCC_AHBPeriph_GPIOE               RCC_AHBENR_GPIOEEN
 #define RCC_AHBPeriph_GPIOF               RCC_AHBENR_GPIOFEN
+#define RCC_AHBPeriph_GPIOG               RCC_AHBENR_GPIOGEN
+#define RCC_AHBPeriph_GPIOH               RCC_AHBENR_GPIOHEN
 #define RCC_AHBPeriph_TS                  RCC_AHBENR_TSEN
 #define RCC_AHBPeriph_CRC                 RCC_AHBENR_CRCEN
+#define RCC_AHBPeriph_FMC                 RCC_AHBENR_FMCEN
 #define RCC_AHBPeriph_FLITF               RCC_AHBENR_FLITFEN
 #define RCC_AHBPeriph_SRAM                RCC_AHBENR_SRAMEN
 #define RCC_AHBPeriph_DMA2                RCC_AHBENR_DMA2EN
 #define RCC_AHBPeriph_DMA1                RCC_AHBENR_DMA1EN
 
-#define IS_RCC_AHB_PERIPH(PERIPH) ((((PERIPH) & 0xCE81FFA8) == 0x00) && ((PERIPH) != 0x00))
-#define IS_RCC_AHB_RST_PERIPH(PERIPH) ((((PERIPH) & 0xCE81FFFF) == 0x00) && ((PERIPH) != 0x00))
+#define IS_RCC_AHB_PERIPH(PERIPH) ((((PERIPH) & 0xCE00FF88) == 0x00) && ((PERIPH) != 0x00))
+#define IS_RCC_AHB_RST_PERIPH(PERIPH) ((((PERIPH) & 0xCE00FFDF) == 0x00) && ((PERIPH) != 0x00))
 
 /**
   * @}
@@ -487,12 +505,14 @@ typedef struct
 #define RCC_APB2Periph_SPI1              RCC_APB2ENR_SPI1EN
 #define RCC_APB2Periph_TIM8              RCC_APB2ENR_TIM8EN
 #define RCC_APB2Periph_USART1            RCC_APB2ENR_USART1EN
+#define RCC_APB2Periph_SPI4              RCC_APB2ENR_SPI4EN
 #define RCC_APB2Periph_TIM15             RCC_APB2ENR_TIM15EN
 #define RCC_APB2Periph_TIM16             RCC_APB2ENR_TIM16EN
 #define RCC_APB2Periph_TIM17             RCC_APB2ENR_TIM17EN
+#define RCC_APB2Periph_TIM20             RCC_APB2ENR_TIM20EN
 #define RCC_APB2Periph_HRTIM1            RCC_APB2ENR_HRTIM1
 
-#define IS_RCC_APB2_PERIPH(PERIPH) ((((PERIPH) & 0xDFF887FE) == 0x00) && ((PERIPH) != 0x00))
+#define IS_RCC_APB2_PERIPH(PERIPH) ((((PERIPH) & 0xDFE807FE) == 0x00) && ((PERIPH) != 0x00))
 
 /**
   * @}
