@@ -2,25 +2,18 @@
   ******************************************************************************
   * @file    CAN/CAN_Networking/main.c 
   * @author  MCD Application Team
-  * @version V1.1.2
-  * @date    14-August-2015
+  * @version V1.1.3
+  * @date    14-December-2021
   * @brief   Main program body
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * Copyright (c) 2015 STMicroelectronics.
+  * All rights reserved.
   *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -91,7 +84,10 @@ int main(void)
         LED_Display(++KeyNumber);
         TxMessage.Data[0] = KeyNumber;
         CAN_Transmit(CANx, &TxMessage);
-        Delay();
+        /* Wait until one of the mailboxes is empty */
+        while((CAN_GetFlagStatus(CANx, CAN_FLAG_RQCP0) !=RESET) || \
+              (CAN_GetFlagStatus(CANx, CAN_FLAG_RQCP1) !=RESET) || \
+              (CAN_GetFlagStatus(CANx, CAN_FLAG_RQCP2) !=RESET));
         
         while(STM_EVAL_PBGetState(BUTTON_KEY) != KEY_NOT_PRESSED)
         {
@@ -263,4 +259,3 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

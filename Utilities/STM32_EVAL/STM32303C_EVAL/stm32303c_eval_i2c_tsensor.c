@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32303c_eval_i2c_tsensor.c
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    31-October-2014
+  * @version V1.0.4
+  * @date    15-December-2021
   * @brief   This file provides a set of functions needed to manage the I2C TS751 
   *          temperature sensor mounted on STM32303C-EVAL board . 
   *          It implements a high level communication layer for read and write 
@@ -30,19 +30,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * Copyright (c) 2014 STMicroelectronics.
+  * All rights reserved.
   *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -751,4 +744,3 @@ uint8_t TS751_ShutDown(FunctionalState NewState)
   * @}
   */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

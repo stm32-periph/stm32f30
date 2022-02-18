@@ -5,23 +5,18 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    COMP/COMP_Hygrometer/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.2
-  * @date    14-August-2015
+  * @version V1.1.3
+  * @date    15-December-2021
   * @brief   Description of the hygrometer Example
   ******************************************************************************
   *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
+  * Copyright (c) 2015 STMicroelectronics.
+  * All rights reserved.
   *
-  *        http://www.st.com/software_license_agreement_liberty_v2
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
-  *   
   ******************************************************************************
    @endverbatim
 
@@ -107,7 +102,7 @@ This phase can be canceled by pushing KEY button but displayed humidity value is
 
   - This example runs on STM32F303xC and STM32F303xE Devices.
   
-  - This example has been tested with STMicroelectronics STM32303C-EVAL (STM32F30x)
+  - This example has been tested with STMicroelectronics STM32303-EVAL RevB (STM32F30x)
     evaluation board and can be easily tailored to any other supported device 
     and development board.
 
@@ -128,5 +123,5 @@ In order to make the program work, you must do the following :
  - Rebuild all files and load your image into target memory
  - Run the example
     
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */
