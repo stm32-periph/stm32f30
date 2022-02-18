@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32303c_eval_lcd.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    04-April-2014
+  * @version V1.0.3
+  * @date    31-October-2014
   * @brief   This file includes the LCD driver for AM-240320L8TNQW00H (ILI9320), 
   *          AM-240320LDTNQW00H (SPFD5408B) and AM240320LGTNQW00H (HX8347D) 
   *          Liquid Crystal Display Module of STM32303C-EVAL board.

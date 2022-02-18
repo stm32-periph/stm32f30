@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f30x_syscfg.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    24-July-2014
+  * @version V1.2.1
+  * @date    31-October-2014
   * @brief   This file provides firmware functions to manage the following 
   *          functionalities of the SYSCFG peripheral:
   *           + Remapping the memory mapped at 0x00000000  
@@ -59,7 +59,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-/* Reset value od SYSCFG_CFGR1 register */
+/* Reset value of SYSCFG_CFGR1 register */
 #define CFGR1_CLEAR_MASK            ((uint32_t)0x7C000000)
 
 /* ------------ SYSCFG registers bit address in the alias region -------------*/
@@ -317,7 +317,7 @@ void SYSCFG_USBInterruptLineRemapCmd(FunctionalState NewState)
   /* Check the parameter */
   assert_param(IS_FUNCTIONAL_STATE(NewState));
 
-  /* Remap the USB interupt lines */
+  /* Remap the USB interrupt lines */
   *(__IO uint32_t *) CFGR1_USBITRMP_BB = (uint32_t)NewState;
 }
 
@@ -339,7 +339,7 @@ void SYSCFG_USBInterruptLineRemapCmd(FunctionalState NewState)
   * @note  For I2C1, fast mode plus driving capability can be enabled on all selected
   *        I2C1 pins using SYSCFG_I2CFastModePlus_I2C1 parameter or independently
   *        on each one of the following pins PB6, PB7, PB8 and PB9.
-  * @note  For remaing I2C1 pins (PA14, PA15...) fast mode plus driving capability
+  * @note  For remaining I2C1 pins (PA14, PA15...) fast mode plus driving capability
   *        can be enabled only by using SYSCFG_I2CFastModePlus_I2C1 parameter.
   * @note  For all I2C2 pins fast mode plus driving capability can be enabled
   *        only by using SYSCFG_I2CFastModePlus_I2C2 parameter.
@@ -444,7 +444,7 @@ void SYSCFG_BreakConfig(uint32_t SYSCFG_Break)
   */
 void SYSCFG_BypassParityCheckDisable(void)
 {
-  /* Disable the adddress parity check on RAM */
+  /* Disable the address parity check on RAM */
   *(__IO uint32_t *) CFGR1_BYPADDRPAR_BB = (uint32_t)0x00000001;
 }
 

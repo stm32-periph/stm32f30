@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f30x_comp.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    24-July-2014
+  * @version V1.2.1
+  * @date    31-October-2014
   * @brief   This file provides firmware functions to manage the following 
   *          functionalities of the 7 analog comparators (COMP1, COMP2...COMP7) peripheral: 
   *           + Comparators configuration
@@ -237,6 +237,9 @@ void COMP_DeInit(uint32_t COMP_Selection)
   *           - COMP_OutputPol select output polarity
   *           - COMP_Hysteresis configures COMP hysteresis value
   *           - COMP_Mode configures COMP power mode
+  * @note    COMP_Hysteresis must be configured only for STM32F303xC. Otherwise, COMP_Hysteresis
+  *          must be kept at reset value(COMP_Hysteresis_No).
+  * @note    COMP_Mode field is only applicable for STM32F303xC devices.
   * @retval None
   */
 void COMP_Init(uint32_t COMP_Selection, COMP_InitTypeDef* COMP_InitStruct)

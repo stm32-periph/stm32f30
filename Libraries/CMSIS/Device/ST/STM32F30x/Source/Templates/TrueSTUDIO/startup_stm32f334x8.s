@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file      startup_stm32f334x8.s
   * @author    MCD Application Team
-  * @version   V1.2.0
-  * @date      24-July-2014
+  * @version   V1.2.1
+  * @date      31-October-2014
   * @brief     stm32f30x vector table for Atollic TrueSTUDIO toolchain.
   *            This module performs:
   *                - Set the initial SP
@@ -97,7 +97,7 @@ LoopFillZerobss:
 	cmp	r2, r3
 	bcc	FillZerobss
 
-/* Call the clock system intitialization function.*/
+/* Call the clock system initialization function.*/
 	bl  SystemInit
 /* Call static constructors */
 	bl __libc_init_array

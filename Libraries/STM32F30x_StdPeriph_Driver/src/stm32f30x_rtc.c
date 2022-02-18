@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f30x_rtc.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    24-July-2014
+  * @version V1.2.1
+  * @date    31-October-2014
   * @brief   This file provides firmware functions to manage the following 
   *          functionalities of the Real-Time Clock (RTC) peripheral:
   *           + Initialization
@@ -1753,7 +1753,7 @@ void RTC_CalibOutputConfig(uint32_t RTC_CalibOutput)
   *   This parameter can be can be one of the following values:
   *     @arg RTC_SmoothCalibPeriod_32sec : The smooth calibration periode is 32s.
   *     @arg RTC_SmoothCalibPeriod_16sec : The smooth calibration periode is 16s.
-  *     @arg RTC_SmoothCalibPeriod_8sec  : The smooth calibartion periode is 8s.
+  *     @arg RTC_SmoothCalibPeriod_8sec  : The smooth calibration periode is 8s.
   * @param  RTC_SmoothCalibPlusPulses : Select to Set or reset the CALP bit.
   *   This parameter can be one of the following values:
   *     @arg RTC_SmoothCalibPlusPulses_Set  : Add one RTCCLK puls every 2**11 pulses.

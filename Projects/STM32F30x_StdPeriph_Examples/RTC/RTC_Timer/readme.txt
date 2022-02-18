@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    RTC/RTC_Timer/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    24-July-2014
+  * @version V1.1.1
+  * @date    31-October-2014
   * @brief   Description of the RTC Timer example.
   ******************************************************************************
   *
@@ -46,7 +46,7 @@
     - press Joystick SEL button to Start the timer.
     - press again Joystick SEL button to stop the timer.
     - press Joystick RIGHT button to Restart the timer.
-    - press Joystick UP/DWON button to adjust the timer. 
+    - press Joystick UP/DOWN button to adjust the timer. 
 
 @par Directory contents 
 

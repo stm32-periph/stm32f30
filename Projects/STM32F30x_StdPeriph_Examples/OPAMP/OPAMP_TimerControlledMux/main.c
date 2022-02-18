@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    OPAMP/OPAMP_TimerControlledMux/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    24-July-2014
+  * @version V1.1.1
+  * @date    31-October-2014
   * @brief   Main program body
   ******************************************************************************
   * @attention
@@ -238,7 +238,7 @@ static void ADC1_Config(void)
   /* ADC1 regular channel3 configuration */ 
   ADC_RegularChannelConfig(ADC1, ADC_Channel_3, 1, ADC_SampleTime_7Cycles5);
   
-  /* Enable EOC interupt */
+  /* Enable EOC interrupt */
   ADC_ITConfig(ADC1, ADC_IT_EOC, ENABLE);
   
   /* Enable ADC1 IRQ */

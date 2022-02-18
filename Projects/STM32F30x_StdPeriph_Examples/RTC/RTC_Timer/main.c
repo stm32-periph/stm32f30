@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    RTC/RTC_Timer/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    24-July-2014
+  * @version V1.1.1
+  * @date    31-October-2014
   * @brief   Main program body
   ******************************************************************************
   * @attention
@@ -237,7 +237,7 @@ static void RTC_AlarmConfig(void)
   RTC_AlarmStructure.RTC_AlarmMask = RTC_AlarmMask_All;
   RTC_SetAlarm(RTC_Format_BIN, RTC_Alarm_A, &RTC_AlarmStructure);
   
-  /* Set AlarmA subseconds and enable SubSec Alarm : generate 8 interripts per Second */
+  /* Set AlarmA subseconds and enable SubSec Alarm : generate 8 Interrupts per Second */
   RTC_AlarmSubSecondConfig(RTC_Alarm_A, 0xFF, RTC_AlarmSubSecondMask_SS14_5);
   
   /* Enable AlarmA interrupt */

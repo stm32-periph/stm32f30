@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    CRC/CRC_TwoBoards/stm32f30x_it.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    24-July-2014
+  * @version V1.1.1
+  * @date    31-October-2014
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
@@ -184,7 +184,7 @@ void USARTx_IRQHandler(void)
       
     } else if (TxIndex == 0x48)
     {
-      /* Get computed computed value */
+      /* Get computed value */
       TxBuffer[TxIndex] = (uint8_t)CRC_GetCRC();
       
       /* Reset CRC calculation unit */
@@ -217,16 +217,16 @@ void USARTx_IRQHandler(void)
     }
     else if (RxIndex == 0x48)
     {
-      /* Get computed computed value */
+      /* Get computed value */
       ComputedCRC = (uint8_t)CRC_GetCRC();
       
       /* Reset CRC calculation unit */
       CRC_ResetDR();
       
-      /* Recive expected CRC value */
+      /* Receive expected CRC value */
       RxBuffer[RxIndex] = USART_ReceiveData(USARTx);
       
-      /* Compare computed CRC and recived CRC values*/
+      /* Compare computed CRC and received CRC values*/
       if (ComputedCRC == RxBuffer[RxIndex])
       {
         /* LED3 Off */ 

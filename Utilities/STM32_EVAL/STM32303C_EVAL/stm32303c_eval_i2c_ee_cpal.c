@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32303c_eval_i2c_ee_cpal.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    04-April-2014
+  * @version V1.0.3
+  * @date    31-October-2014
   * @brief   This file provides a set of functions needed to manage I2C  
   *          EEPROM memory. 
   *            
@@ -338,7 +338,7 @@ uint32_t sEE_WriteBuffer(sEE_InitTypeDef* sEEInitStruct, uint8_t* pBuffer, \
       /* Transfer complete */
       sEE_WriteStructures[sEEInitStruct->sEE_CPALStructure->CPAL_Dev]->sEENextWrite = 0;
       
-      /* update number od data for write */
+      /* update number of data for write */
       DataNum = NumByteToWrite;
       
       if(sEE_WritePage(sEEInitStruct, pBuffer, WriteAddr, DataNum) != CPAL_PASS)

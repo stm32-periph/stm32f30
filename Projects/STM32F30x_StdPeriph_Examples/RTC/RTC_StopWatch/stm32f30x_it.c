@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    RTC/RTC_StopWatch/stm32f30x_it.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    24-July-2014
+  * @version V1.1.1
+  * @date    31-October-2014
   * @brief   Main Interrupt Service Routines.
   ******************************************************************************
   * @attention
@@ -268,14 +268,14 @@ void TAMPER_STAMP_IRQHandler(void)
     /* Clear LCD line 5 to 9 */
     for (i=0; i < 5; i++)
     {  
-      /* Clear all the LCD lignes from 3 to 7 */
+      /* Clear all the LCD lines from 3 to 7 */
       LCD_ClearLine(LINE(3+i));
     }
     
     /* reset Counter */
     BackupIndex = 0 ;
     
-    /* Enetr to idle */
+    /* Enter to idle */
     StartEvent =0x0;
     
     RTC_Time_InitDisplay();
@@ -287,7 +287,7 @@ void TAMPER_STAMP_IRQHandler(void)
     /* Enable Tamper interrupt */
     RTC_ITConfig(RTC_IT_TAMP, DISABLE);
     
-    /* Enabale the tamper 1 */
+    /* Enable the tamper 1 */
     RTC_TamperCmd(RTC_Tamper_1 , DISABLE);
   }  
   /* Clear EXTI line 19 */

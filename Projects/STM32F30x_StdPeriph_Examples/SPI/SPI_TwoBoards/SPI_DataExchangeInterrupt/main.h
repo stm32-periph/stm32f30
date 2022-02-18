@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    SPI/SPI_TwoBoards/SPI_DataExchangeInterrupt/main.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    24-July-2014
+  * @version V1.1.1
+  * @date    31-October-2014
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -44,7 +44,7 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 /* Uncomment the line below if you will use the SPI peripheral as a Slave */
 #define SPI_SLAVE
 
-/* Uncomment the size of data to be transmetted (only one data size must be selected) */
+/* Uncomment the size of data to be transmitted (only one data size must be selected) */
 //#define SPI_DATASIZE_8
 //#define SPI_DATASIZE_7
 //#define SPI_DATASIZE_6

@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    COMP/COMP_OutputBlanking/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    24-July-2014
+  * @version V1.1.1
+  * @date    31-October-2014
   * @brief   Description of the COMP output blanking Example
   ******************************************************************************
   *
@@ -60,7 +60,7 @@ generated and TIM1 CH2 (PA9) is held in safe state (low level).
 
 In order to test this example, follow these steps:
 - Connect TIM1 CH2 (PA9) to a scope and to the input trigger of a wave generator
-- Connect the wave generator ouput to COMP1 Non Inverting input (PA1)
+- Connect the wave generator output to COMP1 Non Inverting input (PA1)
 - Configure the wave generator to output a pulse at rising edge event with 
   high level greater than VREFINT (1.22V) and pulse duration lower 27.7 micro second
   (as an example you can use 10 micro second). 

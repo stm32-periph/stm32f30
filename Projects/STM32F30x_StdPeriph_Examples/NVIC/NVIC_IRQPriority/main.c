@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    NVIC/NVIC_IRQPriority/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    24-July-2014
+  * @version V1.1.1
+  * @date    31-October-2014
   * @brief   Main program body
   ******************************************************************************
   * @attention
@@ -78,7 +78,7 @@ int main(void)
   {
     if(PreemptionOccured != 0)
     {
-      /* Toggel The lED1 */
+      /* Toggle The lED1 */
       STM_EVAL_LEDToggle(LED1);
       
       /* Insert delay Time */

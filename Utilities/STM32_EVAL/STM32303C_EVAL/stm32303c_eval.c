@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32303c_eval.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    04-April-2014
+  * @version V1.0.3
+  * @date    31-October-2014
   * @brief   This file provides firmware functions to manage Leds, push-buttons, 
   *          COM ports, SD card on SPI and temperature sensor (TS751) available on 
   *          STM32303C-EVAL evaluation board from STMicroelectronics.

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32303c_eval_i2c_ee.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    04-April-2014
+  * @version V1.0.3
+  * @date    31-October-2014
   * @brief   This file provides a set of functions needed to manage an I2C M24LR64 
   *          and M24M01 EEPROM memory.
   *                       

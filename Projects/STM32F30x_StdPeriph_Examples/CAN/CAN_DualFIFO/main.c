@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    CAN/CAN_DualFIFO/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    24-July-2014
+  * @version V1.1.1
+  * @date    31-October-2014
   * @brief   Main program body
   ******************************************************************************
   * @attention
@@ -102,7 +102,7 @@ int main(void)
   /* Set the LCD Text size */
   LCD_SetFont(&Font12x12);
   
-  /* Display Messages on the the LCD */  
+  /* Display Messages on the LCD */  
   LCD_DisplayStringLine(LINE(0x7), (uint8_t *)MESSAGE2);
   LCD_DisplayStringLine(LINE(0x8), (uint8_t *)MESSAGE3);
                         

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f30x_usart.h
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    24-July-2014
+  * @version V1.2.1
+  * @date    31-October-2014
   * @brief   This file contains all the functions prototypes for the USART 
   *          firmware library.
   ******************************************************************************
@@ -73,10 +73,10 @@ typedef struct
                                                  the word length is set to 9 data bits; 8th bit when the
                                                  word length is set to 8 data bits). */
  
-  uint32_t USART_Mode;                /*!< Specifies wether the Receive or Transmit mode is enabled or disabled.
+  uint32_t USART_Mode;                /*!< Specifies whether the Receive or Transmit mode is enabled or disabled.
                                            This parameter can be a value of @ref USART_Mode */
 
-  uint32_t USART_HardwareFlowControl; /*!< Specifies wether the hardware flow control mode is enabled
+  uint32_t USART_HardwareFlowControl; /*!< Specifies whether the hardware flow control mode is enabled
                                            or disabled.
                                            This parameter can be a value of @ref USART_Hardware_Flow_Control*/
 } USART_InitTypeDef;

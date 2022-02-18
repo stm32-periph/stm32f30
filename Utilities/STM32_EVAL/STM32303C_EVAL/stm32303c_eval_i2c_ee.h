@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32303c_eval_i2c_ee.h
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    04-April-2014
+  * @version V1.0.3
+  * @date    31-October-2014
   * @brief   This file contains all the functions prototypes for 
   *          the stm32303c_eval_i2c_ee.c firmware driver.
   ******************************************************************************
@@ -72,7 +72,7 @@
 /* Uncomment the following line to use the default sEE_TIMEOUT_UserCallback() 
    function implemented in stm32303c_eval_i2c_ee.c file.
    sEE_TIMEOUT_UserCallback() function is called whenever a timeout condition 
-   occure during communication (waiting on an event that doesn't occur, bus 
+   occur during communication (waiting on an event that doesn't occur, bus 
    errors, busy devices ...). */   
 /* #define USE_DEFAULT_TIMEOUT_CALLBACK */
    
@@ -89,12 +89,12 @@
 #ifdef sEE_M24C64_32
 /* For M24C32 and M24C64 devices, E0,E1 and E2 pins are all used for device 
   address selection (ne need for additional address lines). According to the 
-  Harware connection on the board. */
+  Hardware connection on the board. */
 
  #define sEE_HW_ADDRESS         0xA0   /* E0 = E1 = E2 = 0 */ 
 
 #elif defined (sEE_M24C08)
-/* The M24C08W contains 4 blocks (128byte each) with the adresses below: E2 = 0 
+/* The M24C08W contains 4 blocks (128byte each) with the addresses below: E2 = 0 
    EEPROM Addresses defines */
  #define sEE_HW_ADDRESS     0xA0   /* E2 = 0 */ 
  /*#define sEE_HW_ADDRESS     0xA2*/ /* E2 = 0 */  
@@ -166,9 +166,9 @@ void     sEE_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, uint16_t NumByteT
 uint32_t sEE_WaitEepromStandbyState(void);
 
 /* USER Callbacks: These are functions for which prototypes only are declared in
-   EEPROM driver and that should be implemented into user applicaiton. */  
+   EEPROM driver and that should be implemented into user application. */  
 /* sEE_TIMEOUT_UserCallback() function is called whenever a timeout condition 
-   occure during communication (waiting on an event that doesn't occur, bus 
+   occur during communication (waiting on an event that doesn't occur, bus 
    errors, busy devices ...).
    You can use the default timeout callback implementation by uncommenting the 
    define USE_DEFAULT_TIMEOUT_CALLBACK in stm32303c_eval_i2c_ee.h file.

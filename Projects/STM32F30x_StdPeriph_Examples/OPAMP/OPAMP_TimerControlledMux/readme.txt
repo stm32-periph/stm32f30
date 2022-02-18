@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    OPAMP/OPAMP_TimerControlledMux/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    24-July-2014
+  * @version V1.1.1
+  * @date    31-October-2014
   * @brief   Description of OPMAP1 in timer-controlled multiplexer example.
   ******************************************************************************
   *
@@ -56,7 +56,7 @@ stored in ADCVal[] array.
 
 In order to test this example, follow these steps:
 - Connect the OPAMP1 inverting input (PC5) to OPAMP1 output (PA2) to create an
-  external folower
+  external follower
 - Connect an external signal to the default non-inverting input (PA7)
 - Connect another external signal to the secondary non-inverting input (PA5)
 

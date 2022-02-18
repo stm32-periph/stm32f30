@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f30x_i2c_cpal.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    24-July-2014
+  * @version V1.2.1
+  * @date    31-October-2014
   * @brief   This file provides all the CPAL firmware functions for I2C peripheral.
   ******************************************************************************
   * @attention
@@ -1132,7 +1132,7 @@ uint32_t CPAL_I2C_Read(CPAL_InitTypeDef* pDevInitStruct)
         /* Set Nbytes to wNumData */
         CR2_tmp |= (uint32_t)((uint32_t)(255) << 16);
 
-        /* Enaable reload */
+        /* Enable reload */
         CR2_tmp |= I2C_CR2_RELOAD;
       }
 
@@ -1814,7 +1814,7 @@ static uint32_t I2C_MASTER_TCR_Handle(CPAL_InitTypeDef* pDevInitStruct)
       /* Set Nbytes to wNumData */
       CR2_tmp |= (uint32_t)((uint32_t)(255) << 16);
 
-      /* Enaable reload */
+      /* Enable reload */
       CR2_tmp |= I2C_CR2_RELOAD;
     }
   }
@@ -1840,7 +1840,7 @@ static uint32_t I2C_MASTER_TCR_Handle(CPAL_InitTypeDef* pDevInitStruct)
       /* Set Nbytes to wNumData */
       CR2_tmp |= (uint32_t)((uint32_t)(255) << 16);
 
-      /* Enaable reload */
+      /* Enable reload */
       CR2_tmp |= I2C_CR2_RELOAD;
     }
   }

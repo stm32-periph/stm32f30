@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f30x_pwr.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    24-July-2014
+  * @version V1.2.1
+  * @date    31-October-2014
   * @brief   This file provides firmware functions to manage the following 
   *          functionalities of the Power Controller (PWR) peripheral:           
   *           + Backup Domain Access
@@ -330,7 +330,7 @@ void PWR_WakeUpPinCmd(uint32_t PWR_WakeUpPin, FunctionalState NewState)
 
     (+) Comparator auto-wakeup (AWU) from the Stop mode
         (++) To wake up from the Stop mode with a comparator wakeup event, it is necessary to:
-             (+++) Configure the correspondant comparator EXTI Line to be sensitive to 
+             (+++) Configure the correspondent comparator EXTI Line to be sensitive to 
                    the selected edges (falling, rising or falling and rising) 
                    (Interrupt or Event modes) using the EXTI_Init() function.
              (+++) Configure the comparator to generate the event.

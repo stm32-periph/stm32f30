@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USART/USART_WakeUpFromStop/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    24-July-2014
+  * @version V1.1.1
+  * @date    31-October-2014
   * @brief   Main program body
   ******************************************************************************
   * @attention
@@ -89,7 +89,7 @@ int main(void)
   DataReceived = USART_ReceiveData(USART1);
   
   /* Clear the TE bit (if a transmission is on going or a data is in the TDR, it will be sent before
-  efectivelly disabling the transmission) */
+  effectively disabling the transmission) */
   USART_DirectionModeCmd(USART1, USART_Mode_Tx, DISABLE);
   
   /* Check the Transfer Complete Flag */

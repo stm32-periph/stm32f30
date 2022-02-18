@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f30x.h
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    24-July-2014
+  * @version V1.2.1
+  * @date    31-October-2014
   * @brief   CMSIS Cortex-M4 Device Peripheral Access Layer Header File. 
   *          This file contains all the peripheral registers definitions, bits 
   *          definitions and memory mapping for STM32F30x devices.
@@ -64,6 +64,11 @@
 /* Uncomment the line below according to the target STM32 device used in your
    application 
   */
+  
+/* Old STM32F30X definition, maintained for legacy purpose */
+#if defined(STM32F30X) 
+  #define STM32F303xC
+#endif /* STM32F30X */
 
 #if !defined (STM32F303xC) && !defined (STM32F334x8) && !defined (STM32F303x8) && !defined (STM32F301x8) && !defined (STM32F302x8) && !defined (STM32F303xE)
  /* #define STM32F303xC */   /*!< STM32F303CB, STM32F303CC, STM32F303RB, STM32F303RC, STM32F303VB and STM32F303VC Devices */
@@ -72,15 +77,10 @@
                                    STM32F302R4, STM32F302R6 and STM32F302R8 Devices */
  /* #define STM32F303xE */   /*!< STM32F303RE, STM32F303VE, STM32F303ZE Devices */
 #endif
-
+ 
 /*  Tip: To avoid modifying this file each time you need to switch between these
         devices, you can define the device in your toolchain compiler preprocessor.
   */
-
-/* Old STM32F30X definition, maintained for legacy purpose */
-#if defined(STM32F30X) 
-  #define STM32F303xC
-#endif /* STM32F30X */
 
 #if !defined (STM32F303xC) && !defined (STM32F334x8) && !defined (STM32F302x8) && !defined (STM32F303xE)
  #error "Please select first the target STM32F30X device used in your application (in stm32f30x.h file)"
@@ -142,7 +142,7 @@
    */
 #define __STM32F30X_STDPERIPH_VERSION_MAIN   (0x01) /*!< [31:24] main version */                                  
 #define __STM32F30X_STDPERIPH_VERSION_SUB1   (0x02) /*!< [23:16] sub1 version */
-#define __STM32F30X_STDPERIPH_VERSION_SUB2   (0x00) /*!< [15:8]  sub2 version */
+#define __STM32F30X_STDPERIPH_VERSION_SUB2   (0x01) /*!< [15:8]  sub2 version */
 #define __STM32F30X_STDPERIPH_VERSION_RC     (0x00) /*!< [7:0]  release candidate */ 
 #define __STM32F30X_STDPERIPH_VERSION       ( (__STM32F30X_STDPERIPH_VERSION_MAIN << 24)\
                                              |(__STM32F30X_STDPERIPH_VERSION_SUB1 << 16)\
@@ -831,7 +831,7 @@ typedef struct
 {
   __IO uint32_t MCR;            /*!< HRTIM Master Timer control register,                     Address offset: 0x00 */
   __IO uint32_t MISR;           /*!< HRTIM Master Timer interrupt status register,            Address offset: 0x04 */
-  __IO uint32_t MICR;           /*!< HRTIM Master Timer interupt clear register,              Address offset: 0x08 */
+  __IO uint32_t MICR;           /*!< HRTIM Master Timer interrupt clear register,              Address offset: 0x08 */
   __IO uint32_t MDIER;          /*!< HRTIM Master Timer DMA/interrupt enable register         Address offset: 0x0C */
   __IO uint32_t MCNTR;          /*!< HRTIM Master Timer counter register,                     Address offset: 0x10 */
   __IO uint32_t MPER;           /*!< HRTIM Master Timer period register,                      Address offset: 0x14 */
@@ -2661,7 +2661,7 @@ typedef struct
 #define ADC_CFGR_RES_0     ((uint32_t)0x00000008) /*!< ADC RES bit 0 */
 #define ADC_CFGR_RES_1     ((uint32_t)0x00000010) /*!< ADC RES bit 1 */
 
-#define ADC_CFGR_ALIGN     ((uint32_t)0x00000020) /*!< ADC Data Alignement */
+#define ADC_CFGR_ALIGN     ((uint32_t)0x00000020) /*!< ADC Data Alignment */
 
 #define ADC_CFGR_EXTSEL   ((uint32_t)0x000003C0) /*!< ADC External trigger selection for regular group */
 #define ADC_CFGR_EXTSEL_0 ((uint32_t)0x00000040) /*!< ADC EXTSEL bit 0 */
@@ -5684,7 +5684,7 @@ typedef struct
 #define  FMC_BCR1_EXTMOD                    ((uint32_t)0x00004000)        /*!<Extended mode enable       */
 #define  FMC_BCR1_ASYNCWAIT                 ((uint32_t)0x00008000)        /*!<Asynchronous wait          */
 #define  FMC_BCR1_CBURSTRW                  ((uint32_t)0x00080000)        /*!<Write burst enable         */
-#define  FMC_BCR1_CCLKEN                    ((uint32_t)0x00100000)        /*!<Continous clock enable     */
+#define  FMC_BCR1_CCLKEN                    ((uint32_t)0x00100000)        /*!<Conitnuous clock enable     */
 
 /******************  Bit definition for FMC_BCR2 register  *******************/
 #define  FMC_BCR2_MBKEN                     ((uint32_t)0x00000001)        /*!<Memory bank enable bit                 */
@@ -6658,7 +6658,7 @@ typedef struct
 
 #define  FMC_SDRTR_COUNT                    ((uint32_t)0x00003FFE)        /*!<COUNT[12:0] bits (Refresh timer count) */
 
-#define  FMC_SDRTR_REIE                     ((uint32_t)0x00004000)        /*!<RES interupt enable */
+#define  FMC_SDRTR_REIE                     ((uint32_t)0x00004000)        /*!<RES interrupt enable */
 
 /******************  Bit definition for FMC_SDSR register  ******************/
 #define  FMC_SDSR_RE                        ((uint32_t)0x00000001)        /*!<Refresh error flag */
@@ -7249,6 +7249,9 @@ typedef struct
 #define  RCC_CFGR_PLLMULL_3                  ((uint32_t)0x00200000)        /*!< Bit 3 */
 
 #define  RCC_CFGR_PLLSRC_HSI_Div2            ((uint32_t)0x00000000)        /*!< HSI clock divided by 2 selected as PLL entry clock source */
+#define  RCC_CFGR_PLLSRC_HSI_PREDIV          ((uint32_t)0x00008000)        /*!< HSI PREDIV clock selected as PLL entry clock source 
+                                                                                (This bit and configuration is only available for STM32F303xE devices)*/
+
 #define  RCC_CFGR_PLLSRC_PREDIV1             ((uint32_t)0x00010000)        /*!< PREDIV1 clock selected as PLL entry clock source */
 
 #define  RCC_CFGR_PLLXTPRE_PREDIV1           ((uint32_t)0x00000000)        /*!< PREDIV1 clock not divided for PLL entry */

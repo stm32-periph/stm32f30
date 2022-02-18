@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f30x_rcc.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    24-July-2014
+  * @version V1.2.1
+  * @date    31-October-2014
   * @brief   This file provides firmware functions to manage the following 
   *          functionalities of the Reset and clock control (RCC) peripheral:           
   *           + Internal/external clocks, PLL, CSS and MCO configuration
@@ -416,6 +416,7 @@ void RCC_LSICmd(FunctionalState NewState)
   *         PLL source).   
   * @param  RCC_PLLSource: specifies the PLL entry clock source.
   *   This parameter can be one of the following values:
+  *     @arg RCC_PLLSource_HSI: HSI oscillator clockselected as PLL clock entry  
   *     @arg RCC_PLLSource_HSI_Div2: HSI oscillator clock divided by 2 selected as
   *         PLL clock entry
   *     @arg RCC_PLLSource_PREDIV1: PREDIV1 clock selected as PLL clock source              
@@ -507,15 +508,12 @@ void RCC_ClockSecuritySystemCmd(FunctionalState NewState)
   * @param  RCC_MCOSource: specifies the clock source to output.
   *          This parameter can be one of the following values:
   *            @arg RCC_MCOSource_NoClock: No clock selected.
-  *            @arg RCC_MCOSource_HSI14: HSI14 oscillator clock selected.
   *            @arg RCC_MCOSource_LSI: LSI oscillator clock selected.
   *            @arg RCC_MCOSource_LSE: LSE oscillator clock selected.
   *            @arg RCC_MCOSource_SYSCLK: System clock selected.
   *            @arg RCC_MCOSource_HSI: HSI oscillator clock selected.
   *            @arg RCC_MCOSource_HSE: HSE oscillator clock selected.
   *            @arg RCC_MCOSource_PLLCLK_Div2: PLL clock divided by 2 selected.
-  *            @arg RCC_MCOSource_PLLCLK: PLL clock selected.
-  *            @arg RCC_MCOSource_HSI48: HSI48 clock selected.  
   * @retval None
   */
 void RCC_MCOConfig(uint8_t RCC_MCOSource)
@@ -543,7 +541,6 @@ void RCC_MCOConfig(uint8_t RCC_MCOSource)
   * @param  RCC_MCOSource: specifies the clock source to output.
   *          This parameter can be one of the following values:
   *            @arg RCC_MCOSource_NoClock: No clock selected.
-  *            @arg RCC_MCOSource_HSI14: HSI14 oscillator clock selected.
   *            @arg RCC_MCOSource_LSI: LSI oscillator clock selected.
   *            @arg RCC_MCOSource_LSE: LSE oscillator clock selected.
   *            @arg RCC_MCOSource_SYSCLK: System clock selected.
@@ -551,7 +548,6 @@ void RCC_MCOConfig(uint8_t RCC_MCOSource)
   *            @arg RCC_MCOSource_HSE: HSE oscillator clock selected.
   *            @arg RCC_MCOSource_PLLCLK_Div2: PLL clock divided by 2 selected.
   *            @arg RCC_MCOSource_PLLCLK: PLL clock selected.
-  *            @arg RCC_MCOSource_HSI48: HSI48 clock selected.
   * @param  RCC_MCOPrescaler: specifies the prescaler on MCO pin.
   *          This parameter can be one of the following values:
   *            @arg RCC_MCOPrescaler_1: MCO clock is divided by 1.
@@ -1340,16 +1336,22 @@ void RCC_I2CCLKConfig(uint32_t RCC_I2CCLK)
 
 /**
   * @brief  Configures the TIMx clock sources(TIMCLK).
-  * @note     The configuration of the TIMx clock source is only possible when the 
-  *           SYSCLK = PLL and HCLK and PCLK2 clocks are not divided in respect to SYSCLK
-  * @note     If one of the previous conditions is missed, the TIM clock source 
-  *           configuration is lost and calling again this function becomes mandatory.  
+  * @note   For STM32F303xC devices, TIMx can be clocked from the PLL running at 144 MHz 
+  *         when the system clock source is the PLL and HCLK & PCLK2 clocks are not divided in respect to SYSCLK.  
+  *         For the devices STM32F334x8, STM32F302x8 and STM32F303xE, TIMx can be clocked from the PLL running at 
+  *         144 MHz when the system clock source is the PLL and  AHB or APB2 subsystem clocks are not divided by 
+  *         more than 2 cumulatively.
+  * @note   If one of the previous conditions is missed, the TIM clock source 
+  *         configuration is lost and calling again this function becomes mandatory.  
   * @param  RCC_TIMCLK: defines the TIMx clock source.
   *   This parameter can be one of the following values:
-  *     @arg RCC_TIMxCLK_HCLK: TIMx clock = APB high speed clock (doubled frequency
-  *          when prescaled)
+  *     @arg RCC_TIMxCLK_PCLK: TIMx clock = APB clock (doubled frequency when prescaled)
   *     @arg RCC_TIMxCLK_PLLCLK: TIMx clock = PLL output (running up to 144 MHz)
-  *          (x can be 1, 8, 15, 16, 17, 20, 2, 3).
+  *          (x can be 1, 8, 15, 16, 17, 20, 2, 3,4).
+  * @note   For STM32F303xC devices, TIM1 and TIM8 can be clocked at 144MHz. 
+  *         For STM32F303xE devices, TIM1/8/20/2/3/4/15/16/17 can be clocked at 144MHz. 
+  *         For STM32F334x8 devices , only TIM1 can be clocked at 144MHz.
+  *         For STM32F302x8 devices, TIM1/15/16/17 can be clocked at 144MHz
   * @retval None
   */
 void RCC_TIMCLKConfig(uint32_t RCC_TIMCLK)

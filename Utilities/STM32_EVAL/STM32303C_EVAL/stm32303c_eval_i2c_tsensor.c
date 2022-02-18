@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32303c_eval_i2c_tsensor.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    04-April-2014
+  * @version V1.0.3
+  * @date    31-October-2014
   * @brief   This file provides a set of functions needed to manage the I2C TS751 
   *          temperature sensor mounted on STM32303C-EVAL board . 
   *          It implements a high level communication layer for read and write 

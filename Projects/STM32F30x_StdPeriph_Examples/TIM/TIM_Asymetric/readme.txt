@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    TIM/TIM_Asymetric/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    24-July-2014
+  * @version V1.1.1
+  * @date    31-October-2014
   * @brief   TIM Asymetric Example Description.
   ******************************************************************************
   *
@@ -36,14 +36,14 @@ TIM8 is configured to generate an Asymetric signal with a programmable Phase-Shi
 
 TIM1 is configured to generating the reference signal on Channel1 used by TIM8:
 	 - TIM1 is generating a PWM signal with frequency equal to 1.6363 KHz.
-	 - TIM1 is used as master for TIM8, the update event of TIM1 genarates the Reset counter
-	   of TIM8 to synchronize the two signals: the refernce signal (TIM1_CH1) and the shifted signal (TIM8_CH2). 
+	 - TIM1 is used as master for TIM8, the update event of TIM1 generates the Reset counter
+	   of TIM8 to synchronize the two signals: the reference signal (TIM1_CH1) and the shifted signal (TIM8_CH2). 
 	   
 In this example TIM1 and TIM8 input clock (TIM8CLK) is set to APB2 clock (PCLK2)    
 TIM1 and TIM8 signals are at frequency of  (SystemCoreClock / (Period + 1))  
                
-TIM8 is generating a signal with the following caracteristics:
-	- Pulse lenght = (TIM8_CCR1 + TIM8_CCR2) / TIM8_CLK
+TIM8 is generating a signal with the following characteristics:
+	- Pulse length = (TIM8_CCR1 + TIM8_CCR2) / TIM8_CLK
 	- Phase shift = TIM8_CCR2/TIM8_CLK
  with TIM8_CLK = (SystemCoreClock / (Period + 1)), as the prescaler is equal to zero. 
  The Pulse is low level of the output signal of Channel 2 because TIM cannel is configured as Asymetric PWM2 mode.

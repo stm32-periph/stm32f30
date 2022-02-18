@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32303c_eval_i2c_tsensor.h
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    04-April-2014
+  * @version V1.0.3
+  * @date    31-October-2014
   * @brief   This file contains all the functions prototypes for the 
   *          stm32303c_eval_i2c_tsensor.c firmware driver.
   ******************************************************************************
@@ -77,7 +77,7 @@ typedef enum
 /* Uncomment the following line to use Timeout_User_Callback TS751_TimeoutUserCallback(). 
    If This Callback is enabled, it should be implemented by user in main function .
    TS751_TimeoutUserCallback() function is called whenever a timeout condition 
-   occure during communication (waiting on an event that doesn't occur, bus 
+   occur during communication (waiting on an event that doesn't occur, bus 
    errors, busy devices ...). */   
 /*#define USE_TIMEOUT_USER_CALLBACK*/
     
@@ -137,7 +137,7 @@ uint8_t TS751_ShutDown(FunctionalState NewState);
 /** 
   * @brief  Timeout user callback function. This function is called when a timeout
   *         condition occurs during communication with TS751. Only protoype
-  *         of this function is decalred in TS751 driver. Its implementation
+  *         of this function is declared in TS751 driver. Its implementation
   *         may be done into user application. This function may typically stop
   *         current operations and reset the I2C peripheral and TS751.
   *         To enable this function use uncomment the define USE_TIMEOUT_USER_CALLBACK

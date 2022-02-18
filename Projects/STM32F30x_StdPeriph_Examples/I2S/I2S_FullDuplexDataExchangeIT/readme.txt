@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    I2S/I2S_FullDuplexDataExchangeIT/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    24-July-2014
+  * @version V1.1.1
+  * @date    31-October-2014
   * @brief   Description of the I2S Full-Duplex data exchange with Interrupt example.
   ******************************************************************************
   *

@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    CAN/CAN_DualFIFO/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    24-July-2014
+  * @version V1.1.1
+  * @date    31-October-2014
   * @brief   Description of the CAN Dual_FIFO example.
   ******************************************************************************
   *
@@ -31,7 +31,7 @@ This example shows how to configure the CAN peripheral to send and receive
 CAN frames in normal mode and using FIFO0 and FIFO1. The sent frames are used to control Leds 
 by pressing key or SEL push buttons.
 For the sent frames two different.standard identifier are used "0x321" is used when 
-pressing SEL and the other one (0x123) is transmited by pressing on KEY push button .
+pressing SEL and the other one (0x123) is transmitted by pressing on KEY push button .
 
 The CAN serial communication link is a bus to which a number of units may be
 connected. This number has no theoretical limit. Practically the total number

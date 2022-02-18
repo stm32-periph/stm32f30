@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f30x_flash.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    24-July-2014
+  * @version V1.2.1
+  * @date    31-October-2014
   * @brief   This file provides firmware functions to manage the following 
   *          functionalities of the FLASH peripheral:
   *            + FLASH Interface configuration
@@ -455,7 +455,7 @@ FLASH_Status FLASH_ProgramHalfWord(uint32_t Address, uint16_t Data)
  	         (++) FLASH_Status FLASH_OB_BOOTConfig(uint8_t OB_BOOT1); 
                   => to set the boot1 mode
              (++) FLASH_Status FLASH_OB_VDDAConfig(uint8_t OB_VDDA_ANALOG); 
-                  => to Enable/Disable the VDDA monotoring.
+                  => to Enable/Disable the VDDA monitoring.
              (++) FLASH_Status FLASH_OB_SRMParityConfig(uint8_t OB_SRAM_Parity); 
                   => to Enable/Disable the SRAM Parity check.		 
 	         (++) FLASH_Status FLASH_OB_WriteUser(uint8_t OB_USER); 
@@ -848,11 +848,11 @@ FLASH_Status FLASH_OB_VDDAConfig(uint8_t OB_VDDA_ANALOG)
 }
 
 /**
-  * @brief  Sets or resets the SRAM partiy.
-  * @param  OB_SRAM_Parity: Set or Reset the SRAM partiy enable bit.
+  * @brief  Sets or resets the SRAM parity.
+  * @param  OB_SRAM_Parity: Set or Reset the SRAM parity enable bit.
   *         This parameter can be one of the following values:
-  *             @arg OB_SRAM_PARITY_SET: Set SRAM partiy.
-  *             @arg OB_SRAM_PARITY_RESET: Reset SRAM partiy.
+  *             @arg OB_SRAM_PARITY_SET: Set SRAM parity.
+  *             @arg OB_SRAM_PARITY_RESET: Reset SRAM parity.
   * @retval None
   */
 FLASH_Status FLASH_OB_SRAMParityConfig(uint8_t OB_SRAM_Parity)
@@ -1061,7 +1061,7 @@ void FLASH_ITConfig(uint32_t FLASH_IT, FunctionalState NewState)
   * @param  FLASH_FLAG: specifies the FLASH flag to check.
   *   This parameter can be one of the following values:
   *     @arg FLASH_FLAG_BSY: FLASH write/erase operations in progress flag 
-  *     @arg FLASH_FLAG_PGERR: FLASH Programming error flag flag
+  *     @arg FLASH_FLAG_PGERR: FLASH Programming error flag 
   *     @arg FLASH_FLAG_WRPERR: FLASH Write protected error flag
   *     @arg FLASH_FLAG_EOP: FLASH End of Programming flag        
   * @retval The new state of FLASH_FLAG (SET or RESET).
@@ -1089,7 +1089,7 @@ FlagStatus FLASH_GetFlagStatus(uint32_t FLASH_FLAG)
   * @brief  Clears the FLASH's pending flags.
   * @param  FLASH_FLAG: specifies the FLASH flags to clear.
   *   This parameter can be any combination of the following values:
-  *     @arg FLASH_FLAG_PGERR: FLASH Programming error flag flag
+  *     @arg FLASH_FLAG_PGERR: FLASH Programming error flag 
   *     @arg FLASH_FLAG_WRPERR: FLASH Write protected error flag
   *     @arg FLASH_FLAG_EOP: FLASH End of Programming flag                
   * @retval None

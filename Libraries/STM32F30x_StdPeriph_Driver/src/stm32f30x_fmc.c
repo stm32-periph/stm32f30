@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f30x_fmc.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    24-July-2014
+  * @version V1.2.1
+  * @date    31-October-2014
   * @brief   This file provides firmware functions to manage the following 
   *          functionalities of the FMC peripheral:           
   *           + Interface with SRAM, PSRAM, NOR and OneNAND memories

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f30x_tim.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    24-July-2014
+  * @version V1.2.1
+  * @date    31-October-2014
   * @brief   This file provides firmware functions to manage the following 
   *          functionalities of the TIM peripheral:
   *            + TimeBase management
@@ -311,7 +311,7 @@ void TIM_TimeBaseInit(TIM_TypeDef* TIMx, TIM_TimeBaseInitTypeDef* TIM_TimeBaseIn
   }
 
   /* Generate an update event to reload the Prescaler 
-     and the repetition counter(only for TIM1 and TIM8) value immediatly */
+     and the repetition counter(only for TIM1 and TIM8) value immediately */
   TIMx->EGR = TIM_PSCReloadMode_Immediate;          
 }
 
@@ -338,7 +338,7 @@ void TIM_TimeBaseStructInit(TIM_TimeBaseInitTypeDef* TIM_TimeBaseInitStruct)
   * @param  TIM_PSCReloadMode: specifies the TIM Prescaler Reload mode
   *          This parameter can be one of the following values:
   *            @arg TIM_PSCReloadMode_Update: The Prescaler is loaded at the update event.
-  *            @arg TIM_PSCReloadMode_Immediate: The Prescaler is loaded immediatly.
+  *            @arg TIM_PSCReloadMode_Immediate: The Prescaler is loaded immediately.
   * @retval None
   */
 void TIM_PrescalerConfig(TIM_TypeDef* TIMx, uint16_t Prescaler, uint16_t TIM_PSCReloadMode)
@@ -3785,7 +3785,7 @@ void TIM_SelectHallSensor(TIM_TypeDef* TIMx, FunctionalState NewState)
 /**
   * @brief  Configures the TIM16 Remapping input Capabilities.
   * @param TIMx: where x can be 1, 8, 20 or 16 to select the TIM peripheral.
-  * @param TIM_Remap: specifies the TIM input reampping source.
+  * @param TIM_Remap: specifies the TIM input remapping source.
   *   This parameter can be one of the following values:
   *            @arg TIM16_GPIO: TIM16 Channel 1 is connected to GPIO.
   *            @arg TIM16_RTC_CLK: TIM16 Channel 1 is connected to RTC input clock.

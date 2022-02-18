@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32303c_eval_spi_sd.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    04-April-2014
+  * @version V1.0.3
+  * @date    31-October-2014
   * @brief   This file provides a set of functions needed to manage the SPI SD 
   *          Card memory mounted on STM32303C-EVAL board.
   *          It implements a high level communication layer for read and write 
@@ -188,7 +188,7 @@ SD_Error SD_GetCardInfo(SD_CardInfo *cardinfo)
   cardinfo->CardBlockSize = 1 << (cardinfo->SD_csd.RdBlockLen);
   cardinfo->CardCapacity *= cardinfo->CardBlockSize;
 
-  /*!< Returns the reponse */
+  /*!< Returns the response */
   return status;
 }
 
@@ -241,7 +241,7 @@ SD_Error SD_ReadBlock(uint8_t* pBuffer, uint32_t ReadAddr, uint16_t BlockSize)
   /*!< Send dummy byte: 8 Clock pulses of delay */
   SD_WriteByte(SD_DUMMY_BYTE);
   
-  /*!< Returns the reponse */
+  /*!< Returns the response */
   return rvalue;
 }
 
@@ -302,7 +302,7 @@ SD_Error SD_ReadMultiBlocks(uint8_t* pBuffer, uint32_t ReadAddr, uint16_t BlockS
   SD_CS_HIGH();
   /*!< Send dummy byte: 8 Clock pulses of delay */
   SD_WriteByte(SD_DUMMY_BYTE);
-  /*!< Returns the reponse */
+  /*!< Returns the response */
   return rvalue;
 }
 
@@ -358,7 +358,7 @@ SD_Error SD_WriteBlock(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t BlockSize)
   /*!< Send dummy byte: 8 Clock pulses of delay */
   SD_WriteByte(SD_DUMMY_BYTE);
 
-  /*!< Returns the reponse */
+  /*!< Returns the response */
   return rvalue;
 }
 
@@ -423,7 +423,7 @@ SD_Error SD_WriteMultiBlocks(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t Bloc
   SD_CS_HIGH();
   /*!< Send dummy byte: 8 Clock pulses of delay */
   SD_WriteByte(SD_DUMMY_BYTE);
-  /*!< Returns the reponse */
+  /*!< Returns the response */
   return rvalue;
 }
 
@@ -545,7 +545,7 @@ SD_Error SD_GetCSDRegister(SD_CSD* SD_csd)
   SD_csd->CSD_CRC = (CSD_Tab[15] & 0xFE) >> 1;
   SD_csd->Reserved4 = 1;
 
-  /*!< Return the reponse */
+  /*!< Return the response */
   return rvalue;
 }
 
@@ -642,7 +642,7 @@ SD_Error SD_GetCIDRegister(SD_CID* SD_cid)
   SD_cid->CID_CRC = (CID_Tab[15] & 0xFE) >> 1;
   SD_cid->Reserved2 = 1;
 
-  /*!< Return the reponse */
+  /*!< Return the response */
   return rvalue;
 }
 
@@ -802,7 +802,7 @@ SD_Error SD_GoIdleState(void)
   /*!< Wait for In Idle State Response (R1 Format) equal to 0x01 */
   if (SD_GetResponse(SD_IN_IDLE_STATE))
   {
-    /*!< No Idle State Response: return response failue */
+    /*!< No Idle State Response: return response failure */
     return SD_RESPONSE_FAILURE;
   }
   /*----------Activates the card initialization process-----------*/

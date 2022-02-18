@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    ADC/ADC_DifferentialMode/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    24-July-2014
+  * @version V1.1.1
+  * @date    31-October-2014
   * @brief   ADC Differential Example Description.
   ******************************************************************************
   *
@@ -31,7 +31,7 @@ This example describes how to use the ADC1 to convert continuously voltage appli
 to a given analog input channel in differential mode.
 Detailed steps of ADC configuration are provided starting from GPIO configuration
 to the analog channel configuration without forgetting the ADC calibration procedure.  
-In this example the ADC1 Channel7(PC1) and ADC1 Channel8(PC2) are both used to convert the diffential voltage between them.
+In this example the ADC1 Channel7(PC1) and ADC1 Channel8(PC2) are both used to convert the differential voltage between them.
 ADC1 Channel7(PC1) is directly connected to the potentiometer(RV2) available on the STM32303C-EVAL evaluation board.
 ADC1 Channel8(PC2) should be connected to an external power supply.
 The converted differential voltage is displayed on the onboard LCD.

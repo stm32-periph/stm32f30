@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f30x_comp.h
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    24-July-2014
+  * @version V1.2.1
+  * @date    31-October-2014
   * @brief   This file contains all the functions prototypes for the COMP firmware 
   *          library.
   ******************************************************************************
@@ -123,7 +123,8 @@ typedef struct
                                                                             PC0 for COMP7) connected to comparator inverting input */
 
 #define COMP_InvertingInput_IO2                 COMP_CSR_COMPxINSEL    /*!< I/O2 (PB12 for COMP3, PB2 for COMP4, PB10 for COMP5,
-                                                                            PB15 for COMP6) connected to comparator inverting input */
+                                                                            PB15 for COMP6) connected to comparator inverting input. 
+																			It is valid only for STM32F303xC devices */
 
 #define COMP_InvertingInput_DAC2OUT1            COMP_CSR_COMPxINSEL_3  /*!< DAC2_OUT1 (PA6) connected to comparator inverting input */
 

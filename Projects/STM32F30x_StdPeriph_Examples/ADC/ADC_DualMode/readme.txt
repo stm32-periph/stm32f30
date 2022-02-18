@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    ADC/ADC_DualMode/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    24-July-2014
+  * @version V1.1.1
+  * @date    31-October-2014
   * @brief   ADC Dual Mode Example Description.
   ******************************************************************************
   *
@@ -29,7 +29,7 @@
 
 This example provides a short description of how to use the ADC peripheral to
 convert a regular channel in Dual interleaved mode using the DMA to read 
-the converted Data from the commun DR register.
+the converted Data from the common DR register.
 Detailed steps of ADC1 and ADC2 configuration are provided starting from GPIO configuration
 to the analog channel configuration without forgetting the ADC1 and ADC2 calibration procedure. 
  

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f30x_spi.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    24-July-2014
+  * @version V1.2.1
+  * @date    31-October-2014
   * @brief   This file provides firmware functions to manage the following 
   *          functionalities of the Serial peripheral interface (SPI):
   *           + Initialization and Configuration
@@ -165,7 +165,7 @@
          use the following function to manage the NSS bit:
          void SPI_NSSInternalSoftwareConfig(SPI_TypeDef* SPIx, uint16_t SPI_NSSInternalSoft);
     [..] In Master mode, when the Hardware NSS management (SPI_InitStruct->SPI_NSS = SPI_NSS_Hard)
-         is selected, use the follwoing function to enable the NSS output feature.
+         is selected, use the following function to enable the NSS output feature.
          void SPI_SSOutputCmd(SPI_TypeDef* SPIx, FunctionalState NewState);
     [..] The NSS pulse mode can be managed by the SPI TI mode when enabling it using the 
          following function: void SPI_TIModeCmd(SPI_TypeDef* SPIx, FunctionalState NewState);
@@ -699,7 +699,7 @@ void SPI_NSSInternalSoftwareConfig(SPI_TypeDef* SPIx, uint16_t SPI_NSSInternalSo
   *         used for the master I2S peripheral. In this case, if the master is 
   *         configured as transmitter, the slave will be receiver and vice versa.
   *         Or you can force a different mode by modifying the field I2S_Mode to the
-  *         value I2S_SlaveRx or I2S_SlaveTx indepedently of the master configuration.    
+  *         value I2S_SlaveRx or I2S_SlaveTx independently of the master configuration.    
   *         
   * @note   The I2S full duplex extension can be configured in slave mode only.    
   *  

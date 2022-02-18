@@ -1,13 +1,13 @@
 /**
-  @page SPI_MSD SPI Mirco SD Card example
+  @page SPI_MSD SPI Micro SD Card example
   
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    SPI/SPI_MSD/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    24-July-2014
-  * @brief   Description of the SPI Mirco SD Card example.
+  * @version V1.1.1
+  * @date    31-October-2014
+  * @brief   Description of the SPI Micro SD Card example.
   ******************************************************************************
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
