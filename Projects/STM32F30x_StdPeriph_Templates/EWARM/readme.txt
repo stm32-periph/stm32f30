@@ -2,11 +2,11 @@
   @page ewarm EWARM Project Template for STM32F3xx devices
   
   @verbatim
-  ******************* (C) COPYRIGHT 2014 STMicroelectronics ********************
+  ******************* (C) COPYRIGHT 2015 STMicroelectronics ********************
   * @file    readme.txt
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    24-July-2014
+  * @version V1.2.2
+  * @date    14-August-2015
   * @brief   This sub-directory contains all the user-modifiable files needed to
   *          create a new project linked with the STM32F30x Standard Peripherals 
   *          Library and working with IAR Embedded Workbench for ARM (EWARM)
@@ -57,7 +57,7 @@
  - stm32f302x8_flash.icf : This file is the IAR Linker configuration file used to 
                          place program code (readonly) in internal FLASH and data
                          (readwrite, Stack and Heap)in internal SRAM. 
-                         You can customize this file to your need.                                                                                
+                         You can customize this file to your need.
 
  - stm32f302x8_ram.icf   : STM32F302x8 devices  Linker configuration file 
                          used to place program code (readonly) and data (readwrite,
@@ -72,7 +72,7 @@
  - stm32f303xe_ram.icf   : STM32F303xE devices  Linker configuration file 
                          used to place program code (readonly) and data (readwrite,
                          Stack and Heap)in internal SRAM.
-                         You can customize this file to your need.                                                                           
+                         You can customize this file to your need.
                              
  @par How to use it ?
 

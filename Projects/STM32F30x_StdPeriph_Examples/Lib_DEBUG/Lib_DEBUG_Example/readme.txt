@@ -2,11 +2,11 @@
   @page Lib_DEBUG_Example  Lib_DEBUG Example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    Lib_DEBUG/Lib_DEBUG_Example/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    31-October-2014
+  * @version V1.1.2
+  * @date    14-August-2015
   * @brief   Description of the Lib_DEBUG Example.
   ******************************************************************************
   *
@@ -68,7 +68,7 @@ remove it from the final application code.
       
 @par Hardware and Software environment
 
-  - This example runs on STM32F30x Devices.
+  - This example runs on STM32F303xC and STM32F303xE Devices.
   
   - This example has been tested with STMicroelectronics STM32303C-EVAL (STM32F30x)
     evaluation board and can be easily tailored to any other supported device 
@@ -97,6 +97,15 @@ In order to make the program work, you must do the following :
    - "stm32f30x_ip_dbg.c"
  - Rebuild all files and load your image into target memory
  - Run the example
-        
+
+@note Known Limitations
+      This example retargets the C library printf() function to the Hyperterminal
+      (C library I/O redirected).
+      TrueSTUDIO Lite version does not support I/O redirection, and instead
+      have do-nothing stubs compiled into the C runtime library. 
+      To use printf() with TrueSTUDIO Professional version, just include the
+      TrueSTUDIO Minimal System calls file "syscalls.c" provided within the toolchain.
+      It contains additional code to support printf() redirection. 
+
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

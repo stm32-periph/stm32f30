@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    I2C/I2C_TwoBoards/stm32f30x_i2c_cpal_conf.h
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    31-October-2014
+  * @version V1.1.2
+  * @date    14-August-2015
   * @brief   Library configuration file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -353,7 +353,7 @@
    Programming Model */ 
 
 /* Enable the use of IT Programming Model */
-//#define CPAL_I2C_IT_PROGMODEL
+/* #define CPAL_I2C_IT_PROGMODEL */
 /* Uncomment this define and keep "CPAL_I2C_DMA_PROGMODEL" define commented to use Interrupt
    Programming Model */    
    
@@ -385,8 +385,8 @@
 
    WARNING: These two defines are EXCLUSIVE, only one define should be uncommented !
  */
-#define USE_SINGLE_ERROR_CALLBACK   /*<! select single UserCallbacks type */
-//#define USE_MULTIPLE_ERROR_CALLBACK /*<! select multiple UserCallbacks type */
+#define USE_SINGLE_ERROR_CALLBACK          /*<! select single UserCallbacks type */
+/* #define USE_MULTIPLE_ERROR_CALLBACK */ /*<! select multiple UserCallbacks type */
 
 /* Error UserCallbacks : To use an Error UserCallback comment the relative define */
 

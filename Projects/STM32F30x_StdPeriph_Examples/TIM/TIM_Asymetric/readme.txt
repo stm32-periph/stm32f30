@@ -2,11 +2,11 @@
   @page TIM_Asymetric TIM_Asymetric
   
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    TIM/TIM_Asymetric/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    31-October-2014
+  * @version V1.1.2
+  * @date    14-August-2015
   * @brief   TIM Asymetric Example Description.
   ******************************************************************************
   *
@@ -63,7 +63,7 @@ TIM8 is generating a signal with the following characteristics:
   
 @par Hardware and Software environment
 
-  - This example runs on STM32F30x Devices.
+  - This example runs on STM32F303xC and STM32F303xE Devices.
   
   - This example has been tested with STMicroelectronics STM32303C-EVAL (STM32F30x)
     evaluation board and can be easily tailored to any other supported device 

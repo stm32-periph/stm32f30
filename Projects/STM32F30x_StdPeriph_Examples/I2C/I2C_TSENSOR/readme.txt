@@ -2,11 +2,11 @@
   @page I2C_TSENSOR Communication between I2C and STTS751 Temperature sensor
   
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    I2C/I2C_TSENSOR/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    31-October-2014
+  * @version V1.1.2
+  * @date    14-August-2015
   * @brief   Description of the I2C TSENSOR example.
   ******************************************************************************
   *
@@ -59,14 +59,14 @@ By default the STM32303C-EVAL demo are setting them to (see main.c file):
          
 @par Hardware and Software environment
 
-  - This example runs on STM32F30x Devices.
+  - This example runs on STM32F303xC and STM32F303xE Devices.
   
   - This example has been tested with STMicroelectronics STM32303C-EVAL (STM32F30x)
     evaluation board and can be easily tailored to any other supported device 
     and development board. 
 
   - STM32303C-EVAL Set-up
-    - Make sure that JP5 and JP6 jumpers are fitted in position 2-3.
+    - Make sure that JP5 and JP6 jumpers are fitted in position 1-2.
     - Make sure that JP1 jumper is fitted.
     
 @par How to use it ? 

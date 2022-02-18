@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    I2C/I2C_WakeUpFromStop/main.c 
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    31-October-2014
+  * @version V1.1.2
+  * @date    14-August-2015
   * @brief   Main program body
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -193,7 +193,11 @@ int main(void)
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
   GPIO_Init(GPIOA, &GPIO_InitStructure);
 
+#if defined(STM32F303xC)
   RCC_MCOConfig(RCC_MCOSource_SYSCLK);
+#else /* STM32F334x8 || STM32F302x8 || STM32F303xE */
+  RCC_MCOConfig(RCC_MCOSource_SYSCLK, RCC_MCOPrescaler_1);
+#endif /* STM32F303xC */
 
   /* Deinitialize I2Cx Device */ 
   CPAL_I2C_DeInit(&SLAVESTRUCTURE); 

@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    ADC/ADC_DualMode/main.c 
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    31-October-2014
+  * @version V1.1.2
+  * @date    14-August-2015
   * @brief   Main program body
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -199,7 +199,7 @@ void Display(void)
 
   Voltage = (ADC1ConvertedVoltage)/1000;
   mVoltage = (ADC1ConvertedVoltage%1000)/100;
-  sprintf((char*)text,"   ADC1 = %lu,%lu V   ",Voltage,mVoltage);
+  sprintf((char*)text,"   ADC1 = %d,%d V   ",Voltage,mVoltage);
   LCD_DisplayStringLine(LINE(6),text);
 
 
@@ -208,7 +208,7 @@ void Display(void)
 
   Voltage=ADC2ConvertedVoltage/1000;
   mVoltage = (ADC2ConvertedVoltage%1000)/100;
-  sprintf((char*)text,"   ADC2 = %lu,%lu V   ",Voltage,mVoltage);
+  sprintf((char*)text,"   ADC2 = %d,%d V   ",Voltage,mVoltage);
   LCD_DisplayStringLine(LINE(7),text);
 }
 

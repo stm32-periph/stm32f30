@@ -2,11 +2,11 @@
   @page truestudio TrueSTUDIO Project Template for STM32F30xx devices
  
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    readme.txt
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    24-July-2014
+  * @version V1.2.2
+  * @date    14-August-2015
   * @brief   This sub-directory contains all the user-modifiable files needed to
   *          create a new project linked with the STM32F30x Standard Peripherals
   *          Library and working with TrueSTUDIO software toolchain.

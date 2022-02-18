@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    RTC/RTC_Calendar/main.c 
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    31-October-2014
+  * @version V1.1.2
+  * @date    14-August-2015
   * @brief   Main program body
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -40,9 +40,9 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Uncomment the corresponding line to select the RTC Clock source */
-#define RTC_CLOCK_SOURCE_LSE    /* LSE used as RTC source clock */
-//#define RTC_CLOCK_SOURCE_LSI  /* LSI used as RTC source clock. The RTC Clock
-//                                 may varies due to LSI frequency dispersion.*/
+#define RTC_CLOCK_SOURCE_LSE        /* LSE used as RTC source clock */
+/* #define RTC_CLOCK_SOURCE_LSI */  /* LSI used as RTC source clock. The RTC Clock
+                                    may varies due to LSI frequency dispersion.*/
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/

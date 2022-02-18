@@ -2,11 +2,11 @@
   @page I2C_EEPROM  How to use the I2C to drive an EEPROM memory
   
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    I2C/I2C_EEPROM/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    31-October-2014
+  * @version V1.1.2
+  * @date    14-August-2015
   * @brief   Description of the I2C and M24Mxx or M24Lxx EEPROM communication example.
   ******************************************************************************
   *
@@ -91,7 +91,7 @@ Note : By Default this example is configured to run with M24LR64 EEPROM. Refer t
       
 @par Hardware and Software environment
 
-  - This example runs on STM32F30x Devices.
+  - This example runs on STM32F303xC and STM32F303xE Devices.
   
   - This example has been tested with STMicroelectronics STM32303C-EVAL (STM32F30x)
     evaluation board and can be easily tailored to any other supported device 

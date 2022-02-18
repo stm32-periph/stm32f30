@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    PWR/PWR_CurrentConsumption/stm32f30x_lp_modes.h
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    31-October-2014
+  * @version V1.1.2
+  * @date    14-August-2015
   * @brief   Header for stm32f30x_lp_modes.c module
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -38,9 +38,9 @@
  && !defined (STANDBY_RTC_MODE) 
 /* Uncomment the corresponding line to select the STM32F30x Low Power mode */
 #define SLEEP_MODE
-//#define STOP_MODE
-//#define STANDBY_MODE
-//#define STANDBY_RTC_MODE
+/* #define STOP_MODE */
+/* #define STANDBY_MODE */
+/* #define STANDBY_RTC_MODE */
 #endif
 
 #if !defined (SLEEP_MODE) && !defined (STOP_MODE) && !defined (STANDBY_MODE)\

@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    CRC/CRC_32BitsCRCMessage/main.c 
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    31-October-2014
+  * @version V1.1.2
+  * @date    14-August-2015
   * @brief   Main program body
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -101,7 +101,7 @@ int main(void)
   CRC_Config(0x4C11DB7);
 
   /* Compute the CRC value of the 8-bit buffer: CRCBuffer */
-  ComputedCRC = CRC_CalcBlockCRC(CRCBuffer, BUFFER_SIZE);
+  ComputedCRC = CRC_CalcBlockCRC((uint32_t*)CRCBuffer, BUFFER_SIZE);
 
   /* Check if the computed CRC matches the expected one */
   if (ComputedCRC != ExpectedCRC)

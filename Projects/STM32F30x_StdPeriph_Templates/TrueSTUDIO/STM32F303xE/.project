@@ -237,6 +237,11 @@
 			<locationURI>PARENT-2-PROJECT_LOC/main.c</locationURI>
 		</link>
 		<link>
+			<name>User/stm32303c_eval.c</name>
+			<type>1</type>
+			<locationURI>PARENT-4-PROJECT_LOC/Utilities/STM32_EVAL/STM32303C_EVAL/stm32303c_eval.c</locationURI>
+		</link>
+		<link>
 			<name>User/stm32f30x_it.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/stm32f30x_it.c</locationURI>

@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    SPI/SPI_TwoBoards/SPI_DataExchangeInterrupt/main.h
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    31-October-2014
+  * @version V1.1.2
+  * @date    14-August-2015
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -40,14 +40,14 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 /* Exported define -----------------------------------------------------------*/
 
 /* Uncomment the line below if you will use the SPI peripheral as a Master */
-//#define SPI_MASTER 
+/* #define SPI_MASTER */
 /* Uncomment the line below if you will use the SPI peripheral as a Slave */
 #define SPI_SLAVE
 
 /* Uncomment the size of data to be transmitted (only one data size must be selected) */
-//#define SPI_DATASIZE_8
-//#define SPI_DATASIZE_7
-//#define SPI_DATASIZE_6
+/* #define SPI_DATASIZE_8 */
+/* #define SPI_DATASIZE_7 */
+/* #define SPI_DATASIZE_6 */
 #define SPI_DATASIZE_5
 
 

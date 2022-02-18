@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    ADC/ADC_DifferentialMode/main.c
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    31-October-2014
+  * @version V1.1.2
+  * @date    14-August-2015
   * @brief   Main program body
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -175,7 +175,7 @@ void Delay(__IO uint32_t nTime)
   */
 void Display(void)
 {
-  uint32_t v=0,mv=0;
+  uint32_t v=0, mv=0;
   uint8_t text[50];
 
   if(ADC1ConvertedVoltage > 3300)
@@ -183,14 +183,14 @@ void Display(void)
     ADC1ConvertedDiffVoltage = (ADC1ConvertedVoltage - 3300);
     v=(ADC1ConvertedDiffVoltage)/1000;
     mv = (ADC1ConvertedDiffVoltage%1000)/100;
-    sprintf((char*)text,"   ADC =  %lu,%lu V   ",v,mv);
+    sprintf((char*)text,"   ADC =  %d,%d V   ",v,mv);
   }
   else
   {
     ADC1ConvertedDiffVoltage = (3300 - ADC1ConvertedVoltage);
     v=(ADC1ConvertedDiffVoltage)/1000;
     mv = (ADC1ConvertedDiffVoltage%1000)/100;
-    sprintf((char*)text,"   ADC = -%lu,%lu V   ",v,mv);
+    sprintf((char*)text,"   ADC = -%d,%d V   ",v,mv);
   }
 
   /* Set the LCD Back Color and Text Color*/

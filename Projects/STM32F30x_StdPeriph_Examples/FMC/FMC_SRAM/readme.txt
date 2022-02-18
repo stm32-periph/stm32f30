@@ -2,11 +2,11 @@
   @page FMC_SRAM SRAM Program example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    FMC/FMC_SRAM/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    31-October-2014
+  * @version V1.1.2
+  * @date    14-August-2015
   * @brief   Description of the FSMC SRAM example.
   ******************************************************************************
   *

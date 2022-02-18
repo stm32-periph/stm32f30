@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    RTC/RTC_LSI/main.c 
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    31-October-2014
+  * @version V1.1.2
+  * @date    14-August-2015
   * @brief   Main program body
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -186,7 +186,11 @@ static uint32_t GetLSIFrequency(void)
 
   /* Connect internally the TIM16_CH1 to the RTC clock output */
   TIM16->OR = 0x3;
+#if defined(STM32F303xC)
   RCC_MCOConfig(RCC_MCOSource_LSI);
+#else /* STM32F334x8 || STM32F302x8 || STM32F303xE */
+  RCC_MCOConfig(RCC_MCOSource_LSI, RCC_MCOPrescaler_1);
+#endif /* STM32F303xC */
 
   /* TIM16 configuration: Input Capture mode ---------------------
      The reference clock(LSE or external) is connected to TIM16 CH1

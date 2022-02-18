@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    COMP/COMP_Hygrometer/main.h 
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    31-October-2014
+  * @version V1.1.2
+  * @date    14-August-2015
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -70,7 +70,7 @@
 #define FREQ 1100
 
 #define USE_DAC 1                   /* DAC1_OUT1 = 2.085V */
-//#define USE_VREFINT 1            /*  VrefInt = 1.22V Reference Voltage Used */
+/* #define USE_VREFINT 1 */         /*  VrefInt = 1.22V Reference Voltage Used */
 
 #ifdef USE_VREFINT
   #define VREFINT_FACTOR log(3.3f/(3.3f - 1.22f))      /* ln(Vdd/(Vdd-VrefInt)) */

@@ -2,11 +2,11 @@
   @page PWR_Stop PWR STOP example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    PWR/PWR_Stop/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    31-October-2014
+  * @version V1.1.2
+  * @date    14-August-2015
   * @brief   Description of the PWR STOP example.
   ******************************************************************************
   *
@@ -43,7 +43,7 @@ Then, after a delay the system will enter again in STOP mode and exit in the way
 described above. This behavior is repeated in an infinite loop.
 
 Three leds LD2, LD3 and LD4 are used to monitor the system state as following:
- - LD3 Toggling: system in RUN mode
+ - LD1 On, LD3 Toggling: system in RUN mode
  - All LED off: system in STOP mode
  - LD2 is on if EXTI Line6 is used to exit from STOP
  - LD4 is on if EXTI line17(RTC Alarm) is used to exit from STOP 
@@ -63,14 +63,14 @@ Three leds LD2, LD3 and LD4 are used to monitor the system state as following:
              
 @par Hardware and Software environment
 
-  - This example runs on STM32F30x Devices.
+  - This example runs on STM32F303xC and STM32F303xE Devices.
   
   - This example has been tested with STMicroelectronics STM32303C-EVAL (STM32F30x)
     evaluation board and can be easily tailored to any other supported device 
     and development board.
     
   - STM32303C-EVAL Set-up 
-    - Use LED2, LED3 and LED4 leds connected respectively to PE.09, PE.10 and PE.11 pins
+    - Use LED1, LED2, LED3 and LED4 leds connected respectively to PE.09, PE.10 and PE.11 pins
     - Use the Key push-button connected to pin PE.06 (EXTI Line6).
     
 @par How to use it ? 

@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    COMP/COMP_Hygrometer/main.c 
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    31-October-2014
+  * @version V1.1.2
+  * @date    14-August-2015
   * @brief   Main program body
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -202,7 +202,7 @@ static void TIM3_PWM_Config(void)
   periodvalue = (uint16_t) ((SystemCoreClock) / FREQ);
 
   /* Time Base configuration */
-  TIM_TimeBaseStructure.TIM_Prescaler = 0;
+  TIM_TimeBaseStructure.TIM_Prescaler = 1;
   TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
   TIM_TimeBaseStructure.TIM_Period = periodvalue;
   TIM_TimeBaseStructure.TIM_ClockDivision = 0;
@@ -310,7 +310,7 @@ static void TIM4_IC_Config(void)
   periodvalue = (uint16_t) ((SystemCoreClock) / FREQ);
   
   /* Time Base configuration */
-  TIM_TimeBaseStructure.TIM_Prescaler = 0;
+  TIM_TimeBaseStructure.TIM_Prescaler = 1;
   TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
   TIM_TimeBaseStructure.TIM_Period = periodvalue;
   TIM_TimeBaseStructure.TIM_ClockDivision = 0;

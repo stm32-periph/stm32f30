@@ -2,11 +2,11 @@
   @page CRC_TwoBoards USART Communication Boards with CRC checksum example.
   
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    CRC/CRC_TwoBoards/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    31-October-2014
+  * @version V1.1.2
+  * @date    14-August-2015
   * @brief   Description of the USART Communication Boards Interrupt Data Exchange 
   *          using Interrupt example.
   ******************************************************************************
@@ -86,8 +86,8 @@ On Board B,
 - CRC value of received data are computed in Board B and compared with the received one.
   
   CRC checksum result is signaled by LED lightening as following:
-    - CRC received and computed values are equal ==> LD2 toggles, LED4 OFF. 
-    - CRC received and computed values are not equal ==> LD2 Off, LED4 ON. 
+    - CRC received and computed values are equal ==> LD2 toggles, LED3 OFF. 
+    - CRC received and computed values are not equal ==> LD2 Off, LED3 ON. 
 
 The SysTick is configured to generate interrupt each 10ms. A dedicated counter 
 inside the SysTick ISR is used to toggle the LD1 each 100ms indicating that the 
@@ -111,7 +111,7 @@ These operations can be repeated infinitely.
   
 @par Hardware and Software environment
 
-  - This example runs on STM32F30x Devices.
+  - This example runs on STM32F303xC and STM32F303xE Devices.
   
   - This example has been tested with STMicroelectronics STM32303C-EVAL (STM32F30x)
     evaluation board and can be easily tailored to any other supported device 

@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    COMP/COMP_PulseWidthMeasurement/main.c 
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    31-October-2014
+  * @version V1.1.2
+  * @date    14-August-2015
   * @brief   Main program body
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -169,7 +169,11 @@ static void COMP_Config(void)
   COMP_InitStructure.COMP_Output = COMP_Output_TIM2IC4;
   COMP_InitStructure.COMP_OutputPol = COMP_OutputPol_NonInverted;
   COMP_InitStructure.COMP_BlankingSrce = COMP_BlankingSrce_None;
+#if defined(STM32F303xC)
   COMP_InitStructure.COMP_Hysteresis = COMP_Hysteresis_High;
+#else /* STM32F303xE */
+  COMP_InitStructure.COMP_Hysteresis = COMP_Hysteresis_No;
+#endif /* STM32F303xC */
   COMP_InitStructure.COMP_Mode = COMP_Mode_UltraLowPower;
   COMP_Init(COMP_Selection_COMP1, &COMP_InitStructure);
 
@@ -236,7 +240,7 @@ static void LCD_Display(uint32_t value)
 {
   uint8_t text[20] = {0};
   
-  sprintf((char*)text, "PulseWidth = %lu us  ",value);
+  sprintf((char*)text, "PulseWidth = %d us  ",value);
   LCD_DisplayStringLine(LINE(5),text);
 }
 

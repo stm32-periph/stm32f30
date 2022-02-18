@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32f30x_fmc_sram.c
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    31-October-2014
+  * @version V1.1.2
+  * @date    14-August-2015
   * @brief   This file provides a set of functions needed to drive the 
   *          IS61WV51216BLL SRAM memory mounted on STM3210E-EVAL board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.

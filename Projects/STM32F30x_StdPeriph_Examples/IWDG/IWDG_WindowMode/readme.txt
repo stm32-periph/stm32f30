@@ -2,11 +2,11 @@
   @page IWDG_WindowMode IWDG Reset with window mode
   
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    IWDG/IWDG_WindowMode/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    31-October-2014
+  * @version V1.1.2
+  * @date    14-August-2015
   * @brief   IWDG Reset with window mode Example Description.
   ******************************************************************************
   *
@@ -41,9 +41,9 @@ The IWDG counter is refreshed each 750 ms in the main program infinite loop to
 prevent a IWDG reset.
 
 The EXTI Line is used to simulate a software failure: once the EXTI Line event 
-occurs, by pressing the Key push-button, the corresponding interrupt is served.
+occurs, by pressing the Key push-button,LED1 On, the corresponding interrupt is served.
 If the EXTI Line event does not occur, the IWDG counter is indefinitely refreshed
-in the main program infinite loop, and there is no IWDG reset.
+in the main program infinite loop, and there is no IWDG reset,LED2 toggles.
 
 
 @par Directory contents 

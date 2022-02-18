@@ -2,11 +2,11 @@
   @page mdkarm MDK-ARM Project Template for STM32F30xx devices
   
   @verbatim
-  ******************* (C) COPYRIGHT 2014 STMicroelectronics ********************
+  ******************* (C) COPYRIGHT 2015 STMicroelectronics ********************
   * @file    readme.txt
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    24-July-2014
+  * @version V1.2.2
+  * @date    14-August-2015
   * @brief   This sub-directory contains all the user-modifiable files 
   *          needed to create a new project linked with the STM32F30x  
   *          Standard Peripheral Library and working with RealView Microcontroller
@@ -30,11 +30,11 @@
  
  @par Directory contents
  
- - Project.uvproj/.uvopt: A pre-configured project file with the provided library structure
+ - Project.uvprojx/.uvoptx: A pre-configured project file with the provided library structure
                           that produces an executable image with MDK-ARM.
 
 Enabling "Options for Target — Output – Browser Information" is useful for quick 
-source files navigation but may slow the compilation time.                 
+source files navigation but may slow the compilation time.
  
  
  @par How to use it ?
@@ -51,7 +51,7 @@ source files navigation but may slow the compilation time.
                      You can use STMicroelectronics Nucleo to run this project.
                      
       - STM32F334x8: to configure the project for STM32F334x8 devices.
-                     You can use STMicroelectronics Discovery to run this project.              
+                     You can use STMicroelectronics Discovery to run this project.
                      
  - Rebuild all files: Project->Rebuild all target files
  - Load project image: Debug->Start/Stop Debug Session
