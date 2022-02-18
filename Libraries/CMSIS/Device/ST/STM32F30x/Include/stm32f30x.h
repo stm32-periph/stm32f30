@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f30x.h
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    31-October-2014
+  * @version V1.2.2
+  * @date    27-February-2015
   * @brief   CMSIS Cortex-M4 Device Peripheral Access Layer Header File. 
   *          This file contains all the peripheral registers definitions, bits 
   *          definitions and memory mapping for STM32F30x devices.
@@ -25,7 +25,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -70,13 +70,19 @@
   #define STM32F303xC
 #endif /* STM32F30X */
 
-#if !defined (STM32F303xC) && !defined (STM32F334x8) && !defined (STM32F303x8) && !defined (STM32F301x8) && !defined (STM32F302x8) && !defined (STM32F303xE)
- /* #define STM32F303xC */   /*!< STM32F303CB, STM32F303CC, STM32F303RB, STM32F303RC, STM32F303VB and STM32F303VC Devices */
- /* #define STM32F334x8 */   /*!< STM32F334C4, STM32F334C6, STM32F334C8, STM32F334R4, STM32F334R6 and STM32F334R8 Devices */
- /* #define STM32F302x8 */   /*!< STM32F302K4, STM32F302K6, STM32F302K8, STM32F302C4, STM32F302C6, STM32F302C8, 
-                                   STM32F302R4, STM32F302R6 and STM32F302R8 Devices */
- /* #define STM32F303xE */   /*!< STM32F303RE, STM32F303VE, STM32F303ZE Devices */
-#endif
+#if !defined (STM32F303xC) && !defined (STM32F334x8) && !defined (STM32F302x8) && !defined (STM32F303xE)
+/* #define STM32F303xC */   /*!< STM32F303CB, STM32F303CC, STM32F303RB, STM32F303RC, STM32F303VB, STM32F303VC
+                                 STM32F302CB, STM32F302CC, STM32F302RC, STM32F302RB, STM32F302VC, STM32F302VB,
+                                 STM32F358CC, STM32F358RC and STM32F358VC Devices */ 
+/* #define STM32F334x8 */   /*!< STM32F334C4, STM32F334K4, STM32F334C6, STM32F334R6, STM32F334K6, STM32F334C8, STM32F334R8, STM32F334K8,                         
+                                 STM32F303K8, STM32F303K6, STM32F303C8, STM32F303C6, STM32F303R8, STM32F303R6 and STM32F328C8 Devices */
+/* #define STM32F302x8 */   /*!< STM32F302K6, STM32F302K8, STM32F302C6, STM32F302C8, STM32F302R6, STM32F302R8, 
+                                 STM32F301K8, STM32F301C8, STM32F301R8, STM32F301K6, STM32F301C6, STM32F301R6, STM32F313K8 and STM32F318C8 Devices */ 
+/* #define STM32F303xE */   /*!< STM32F303CE, STM32F303CD, STM32F303RE, STM32F303RD, STM32F303VE, STM32F303VD, STM32F303ZE,
+                                 STM32F303ZD, STM32F302CE, STM32F302CD, STM32F302RE, STM32F302RD, STM32F302VE, STM32F302ZE, 
+                                 STM32F302ZD and STM32F398VE Devices */ 
+#endif /* STM32F303xC  || STM32F334x8 || STM32F302x8 || STM32F303xE */
+
  
 /*  Tip: To avoid modifying this file each time you need to switch between these
         devices, you can define the device in your toolchain compiler preprocessor.
@@ -138,11 +144,11 @@
 
 
 /**
- * @brief STM32F30x Standard Peripherals Library version number V1.2.0
+ * @brief STM32F30x Standard Peripherals Library version number V1.2.2
    */
 #define __STM32F30X_STDPERIPH_VERSION_MAIN   (0x01) /*!< [31:24] main version */                                  
 #define __STM32F30X_STDPERIPH_VERSION_SUB1   (0x02) /*!< [23:16] sub1 version */
-#define __STM32F30X_STDPERIPH_VERSION_SUB2   (0x01) /*!< [15:8]  sub2 version */
+#define __STM32F30X_STDPERIPH_VERSION_SUB2   (0x02) /*!< [15:8]  sub2 version */
 #define __STM32F30X_STDPERIPH_VERSION_RC     (0x00) /*!< [7:0]  release candidate */ 
 #define __STM32F30X_STDPERIPH_VERSION       ( (__STM32F30X_STDPERIPH_VERSION_MAIN << 24)\
                                              |(__STM32F30X_STDPERIPH_VERSION_SUB1 << 16)\
@@ -5404,7 +5410,9 @@ typedef struct
 #define  EXTI_IMR_MR26                       ((uint32_t)0x04000000)        /*!< Interrupt Mask on line 26 */
 #define  EXTI_IMR_MR27                       ((uint32_t)0x08000000)        /*!< Interrupt Mask on line 27 */
 #define  EXTI_IMR_MR28                       ((uint32_t)0x10000000)        /*!< Interrupt Mask on line 28 */
-
+#define  EXTI_IMR_MR29                       ((uint32_t)0x20000000)        /*!< Interrupt Mask on line 29 */
+#define  EXTI_IMR_MR30                       ((uint32_t)0x40000000)        /*!< Interrupt Mask on line 30 */
+#define  EXTI_IMR_MR31                       ((uint32_t)0x80000000)        /*!< Interrupt Mask on line 31 */
 /*******************  Bit definition for EXTI_EMR register  *******************/
 #define  EXTI_EMR_MR0                        ((uint32_t)0x00000001)        /*!< Event Mask on line 0 */
 #define  EXTI_EMR_MR1                        ((uint32_t)0x00000002)        /*!< Event Mask on line 1 */
@@ -5435,7 +5443,9 @@ typedef struct
 #define  EXTI_EMR_MR26                       ((uint32_t)0x04000000)        /*!< Event Mask on line 26 */
 #define  EXTI_EMR_MR27                       ((uint32_t)0x08000000)        /*!< Event Mask on line 27 */
 #define  EXTI_EMR_MR28                       ((uint32_t)0x10000000)        /*!< Event Mask on line 28 */
-
+#define  EXTI_EMR_MR29                       ((uint32_t)0x20000000)        /*!< Event Mask on line 29 */
+#define  EXTI_EMR_MR30                       ((uint32_t)0x40000000)        /*!< Event Mask on line 30 */
+#define  EXTI_EMR_MR31                       ((uint32_t)0x80000000)        /*!< Event Mask on line 31 */
 /******************  Bit definition for EXTI_RTSR register  *******************/
 #define  EXTI_RTSR_TR0                       ((uint32_t)0x00000001)        /*!< Rising trigger event configuration bit of line 0 */
 #define  EXTI_RTSR_TR1                       ((uint32_t)0x00000002)        /*!< Rising trigger event configuration bit of line 1 */
@@ -5466,7 +5476,9 @@ typedef struct
 #define  EXTI_RTSR_TR26                      ((uint32_t)0x04000000)        /*!< Rising trigger event configuration bit of line 26 */
 #define  EXTI_RTSR_TR27                      ((uint32_t)0x08000000)        /*!< Rising trigger event configuration bit of line 27 */
 #define  EXTI_RTSR_TR28                      ((uint32_t)0x10000000)        /*!< Rising trigger event configuration bit of line 28 */
-
+#define  EXTI_RTSR_TR29                      ((uint32_t)0x20000000)        /*!< Rising trigger event configuration bit of line 29 */
+#define  EXTI_RTSR_TR30                      ((uint32_t)0x40000000)        /*!< Rising trigger event configuration bit of line 30 */
+#define  EXTI_RTSR_TR31                      ((uint32_t)0x80000000)        /*!< Rising trigger event configuration bit of line 31 */
 /******************  Bit definition for EXTI_FTSR register  *******************/
 #define  EXTI_FTSR_TR0                       ((uint32_t)0x00000001)        /*!< Falling trigger event configuration bit of line 0 */
 #define  EXTI_FTSR_TR1                       ((uint32_t)0x00000002)        /*!< Falling trigger event configuration bit of line 1 */
@@ -5497,7 +5509,9 @@ typedef struct
 #define  EXTI_FTSR_TR26                      ((uint32_t)0x04000000)        /*!< Falling trigger event configuration bit of line 26 */
 #define  EXTI_FTSR_TR27                      ((uint32_t)0x08000000)        /*!< Falling trigger event configuration bit of line 27 */
 #define  EXTI_FTSR_TR28                      ((uint32_t)0x10000000)        /*!< Falling trigger event configuration bit of line 28 */
-
+#define  EXTI_FTSR_TR29                      ((uint32_t)0x20000000)        /*!< Falling trigger event configuration bit of line 29 */
+#define  EXTI_FTSR_TR30                      ((uint32_t)0x40000000)        /*!< Falling trigger event configuration bit of line 30 */
+#define  EXTI_FTSR_TR31                      ((uint32_t)0x80000000)        /*!< Falling trigger event configuration bit of line 31 */
 /******************  Bit definition for EXTI_SWIER register  ******************/
 #define  EXTI_SWIER_SWIER0                   ((uint32_t)0x00000001)        /*!< Software Interrupt on line 0 */
 #define  EXTI_SWIER_SWIER1                   ((uint32_t)0x00000002)        /*!< Software Interrupt on line 1 */
@@ -5528,7 +5542,9 @@ typedef struct
 #define  EXTI_SWIER_SWIER26                  ((uint32_t)0x04000000)        /*!< Software Interrupt on line 26 */
 #define  EXTI_SWIER_SWIER27                  ((uint32_t)0x08000000)        /*!< Software Interrupt on line 27 */
 #define  EXTI_SWIER_SWIER28                  ((uint32_t)0x10000000)        /*!< Software Interrupt on line 28 */
-
+#define  EXTI_SWIER_SWIER29                  ((uint32_t)0x20000000)        /*!< Software Interrupt on line 29 */
+#define  EXTI_SWIER_SWIER30                  ((uint32_t)0x40000000)        /*!< Software Interrupt on line 30 */
+#define  EXTI_SWIER_SWIER31                  ((uint32_t)0x80000000)        /*!< Software Interrupt on line 31 */
 /*******************  Bit definition for EXTI_PR register  ********************/
 #define  EXTI_PR_PR0                         ((uint32_t)0x00000001)        /*!< Pending bit for line 0 */
 #define  EXTI_PR_PR1                         ((uint32_t)0x00000002)        /*!< Pending bit for line 1 */
@@ -5559,6 +5575,31 @@ typedef struct
 #define  EXTI_PR_PR26                        ((uint32_t)0x04000000)        /*!< Pending bit for line 26 */
 #define  EXTI_PR_PR27                        ((uint32_t)0x08000000)        /*!< Pending bit for line 27 */
 #define  EXTI_PR_PR28                        ((uint32_t)0x10000000)        /*!< Pending bit for line 28 */
+#define  EXTI_PR_PR29                        ((uint32_t)0x20000000)        /*!< Pending bit for line 29 */
+#define  EXTI_PR_PR30                        ((uint32_t)0x40000000)        /*!< Pending bit for line 30 */
+#define  EXTI_PR_PR31                        ((uint32_t)0x80000000)        /*!< Pending bit for line 31 */
+/*******************  Bit definition for EXTI_IMR2 register  ******************/
+#define  EXTI_IMR2_MR32                      ((uint32_t)0x00000001)        /*!< Interrupt Mask on line 32 */
+#define  EXTI_IMR2_MR33                      ((uint32_t)0x00000002)        /*!< Interrupt Mask on line 33 */
+#define  EXTI_IMR2_MR34                      ((uint32_t)0x00000004)        /*!< Interrupt Mask on line 34 */
+#define  EXTI_IMR2_MR35                      ((uint32_t)0x00000008)        /*!< Interrupt Mask on line 35 */
+/*******************  Bit definition for EXTI_EMR2 register  ******************/
+#define  EXTI_EMR2_MR32                      ((uint32_t)0x00000001)        /*!< Event Mask on line 32 */
+#define  EXTI_EMR2_MR33                      ((uint32_t)0x00000002)        /*!< Event Mask on line 33 */
+#define  EXTI_EMR2_MR34                      ((uint32_t)0x00000004)        /*!< Event Mask on line 34 */
+#define  EXTI_EMR2_MR35                      ((uint32_t)0x00000008)        /*!< Event Mask on line 35 */
+/******************  Bit definition for EXTI_RTSR2 register  ******************/
+#define  EXTI_RTSR2_TR32                     ((uint32_t)0x00000001)        /*!< Rising trigger event configuration bit of line 32 */
+#define  EXTI_RTSR2_TR33                     ((uint32_t)0x00000002)        /*!< Rising trigger event configuration bit of line 33 */
+/******************  Bit definition for EXTI_FTSR2 register  ******************/
+#define  EXTI_FTSR2_TR32                     ((uint32_t)0x00000001)        /*!< Falling trigger event configuration bit of line 32 */
+#define  EXTI_FTSR2_TR33                     ((uint32_t)0x00000002)        /*!< Falling trigger event configuration bit of line 32 */
+/******************  Bit definition for EXTI_SWIER2 register  *****************/
+#define  EXTI_SWIER2_SWIER32                 ((uint32_t)0x00000001)        /*!< Software Interrupt on line 32 */
+#define  EXTI_SWIER2_SWIER33                 ((uint32_t)0x00000002)        /*!< Software Interrupt on line 32 */
+/*******************  Bit definition for EXTI_PR2 register  *******************/
+#define  EXTI_PR2_PR32                       ((uint32_t)0x00000001)        /*!< Pending bit for line 32 */
+#define  EXTI_PR2_PR33                       ((uint32_t)0x00000002)        /*!< Pending bit for line 32 */
 
 /******************************************************************************/
 /*                                                                            */

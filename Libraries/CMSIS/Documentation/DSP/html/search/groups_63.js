@@ -8,6 +8,7 @@ var searchData=
   ['complex_20magnitude_20squared',['Complex Magnitude Squared',['../group__cmplx__mag__squared.html',1,'']]],
   ['complex_2dby_2dcomplex_20multiplication',['Complex-by-Complex Multiplication',['../group___cmplx_by_cmplx_mult.html',1,'']]],
   ['complex_2dby_2dreal_20multiplication',['Complex-by-Real Multiplication',['../group___cmplx_by_real_mult.html',1,'']]],
+  ['complex_20matrix_20multiplication',['Complex Matrix Multiplication',['../group___cmplx_matrix_mult.html',1,'']]],
   ['complex_20fft_20functions',['Complex FFT Functions',['../group___complex_f_f_t.html',1,'']]],
   ['convolution',['Convolution',['../group___conv.html',1,'']]],
   ['convolution_20example',['Convolution Example',['../group___convolution_example.html',1,'']]],

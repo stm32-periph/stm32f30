@@ -15,8 +15,5 @@ var searchData=
   ['cos_5ffactorsq31_5f512',['cos_factorsQ31_512',['../group___d_c_t4___i_d_c_t4.html#ga3559569e603cb918911074be88523d0e',1,'arm_dct4_init_q31.c']]],
   ['cos_5ffactorsq31_5f8192',['cos_factorsQ31_8192',['../group___d_c_t4___i_d_c_t4.html#gaf687c4bbdbc700a3ad5d807d28de63e4',1,'arm_dct4_init_q31.c']]],
   ['cosoutput',['cosOutput',['../arm__sin__cos__example__f32_8c.html#a85b1050fcef4347d69f35a9aee798f8a',1,'arm_sin_cos_example_f32.c']]],
-  ['cossquareoutput',['cosSquareOutput',['../arm__sin__cos__example__f32_8c.html#a2cb185794dcb587d158f346ab049cc4e',1,'arm_sin_cos_example_f32.c']]],
-  ['costable',['cosTable',['../group___sin_cos.html#ga73d46b72b2e2e5c3301adb7a8a7cab5e',1,'cosTable():&#160;arm_sin_cos_f32.c'],['../group__cos.html#gac597d7d00485bea7080b318b4473e83f',1,'cosTable():&#160;arm_cos_f32.c']]],
-  ['costableq15',['cosTableQ15',['../group__cos.html#ga012ad965e3493ffcc6dd7f9a12569e58',1,'arm_cos_q15.c']]],
-  ['costableq31',['cosTableQ31',['../group___sin_cos.html#gab3ca1fd1431d146c6bde7d39dd7e903d',1,'cosTableQ31():&#160;arm_sin_cos_q31.c'],['../group__cos.html#gafe999a5fcf1774a2292220071096b834',1,'cosTableQ31():&#160;arm_cos_q31.c']]]
+  ['cossquareoutput',['cosSquareOutput',['../arm__sin__cos__example__f32_8c.html#a2cb185794dcb587d158f346ab049cc4e',1,'arm_sin_cos_example_f32.c']]]
 ];

@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    system_stm32f30x.h
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    31-October-2014
+  * @version V1.2.2
+  * @date    27-February-2015
   * @brief   CMSIS Cortex-M4 Device System Source File for STM32F30x devices.  
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.

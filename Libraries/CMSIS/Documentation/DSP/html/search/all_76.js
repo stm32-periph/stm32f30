@@ -15,7 +15,7 @@ var searchData=
   ['vector_20park_20transform',['Vector Park Transform',['../group__park.html',1,'']]],
   ['vector_20scale',['Vector Scale',['../group__scale.html',1,'']]],
   ['vector_20shift',['Vector Shift',['../group__shift.html',1,'']]],
-  ['var',['var',['../arm__class__marks__example__f32_8c.html#a3bd39c4335d84be071cc1eaa9b0a8642',1,'arm_class_marks_example_f32.c']]],
+  ['var',['var',['../_a_r_m_2arm__class__marks__example__f32_8c.html#a3bd39c4335d84be071cc1eaa9b0a8642',1,'var():&#160;arm_class_marks_example_f32.c'],['../_g_c_c_2arm__class__marks__example__f32_8c.html#a3bd39c4335d84be071cc1eaa9b0a8642',1,'var():&#160;arm_class_marks_example_f32.c']]],
   ['variance',['Variance',['../group__variance.html',1,'']]],
   ['variance_20example',['Variance Example',['../group___variance_example.html',1,'']]]
 ];

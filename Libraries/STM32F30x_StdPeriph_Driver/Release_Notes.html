@@ -274,7 +274,7 @@ ul
 Notes for<o:p></o:p> </span><span style="font-size: 20pt; color: rgb(51, 102, 255); font-family: Verdana;">STM32F30x Standard Peripherals Library Drivers (StdPeriph_Drivers)</span><span style="font-size: 20pt; font-family: Verdana;"><o:p></o:p></span><br>
 <span style="font-size: 20pt; font-family: Verdana;"><o:p></o:p></span></h1>
 <p class="MsoNormal" style="text-align: center;" align="center"><span style="font-size: 10pt; font-family: Arial; color: black;">Copyright
-© 2014 STMicroelectronics</span><span style="color: black;"><u1:p></u1:p><o:p></o:p></span></p>
+© 2015 STMicroelectronics</span><span style="color: black;"><u1:p></u1:p><o:p></o:p></span></p>
 <p class="MsoNormal" style="text-align: center;" align="center"><span style="font-size: 10pt;"><img style="border: 0px solid ; width: 86px; height: 65px;" alt="" id="_x0000_i1025" src="../../_htmresc/st_logo.png"></span></p>
 </td>
 </tr>
@@ -285,7 +285,23 @@ Notes for<o:p></o:p> </span><span style="font-size: 20pt; color: rgb(51, 102, 25
 <tbody>
 <tr style="">
 <td style="padding: 0cm;" valign="top">
-            <h2 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;"><span style="font-size: 12pt; color: white;">Update history</span></h2><h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 189px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V1.2.1 /31-October-2014<o:p></o:p></span></h3>
+            <h2 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;"><span style="font-size: 12pt; color: white;">Update history</span></h2><h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 189px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V1.2.2 /27-February-2015<o:p></o:p></span></h3>
+
+            
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
+Changes<o:p></o:p></span></u></b></p>
+
+
+            
+            
+
+
+
+
+
+
+
+<ul><li><span style="color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; display: inline ! important; float: none;">stm32f30x_rcc.c/.h:&nbsp;</span></li><ul><li><span style="color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; display: inline ! important; float: none;">Add note in the&nbsp;RCC_LSEConfig() function header</span><span style="color: rgb(98, 98, 98); font-family: helvetica,arial,sans-serif; font-size: 11.7px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 20px; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; display: inline ! important; float: none; background-color: rgb(255, 255, 255);">:</span><span style="color: rgb(98, 98, 98); font-family: helvetica,arial,sans-serif; font-size: 11.7px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 20px; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; display: inline ! important; float: none; background-color: rgb(255, 255, 255);">&nbsp; * @note&nbsp;&nbsp; Care must be taken when using this function to configure LSE mode <br>&nbsp; *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; as it clears systematically the LSEON bit before any new configuration.<br></span></li></ul></ul><h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 189px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V1.2.1 /31-October-2014<o:p></o:p></span></h3>
 
             
             <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main

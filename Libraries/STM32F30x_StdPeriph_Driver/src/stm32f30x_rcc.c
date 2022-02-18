@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f30x_rcc.c
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    31-October-2014
+  * @version V1.2.2
+  * @date    27-February-2015
   * @brief   This file provides firmware functions to manage the following 
   *          functionalities of the Reset and clock control (RCC) peripheral:           
   *           + Internal/external clocks, PLL, CSS and MCO configuration
@@ -37,7 +37,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -174,15 +174,15 @@ static __I uint16_t ADCPrescTable[16] = {1, 2, 4, 6, 8, 10, 12, 16, 32, 64, 128,
 
 /**
   * @brief  Resets the RCC clock configuration to the default reset state.
-  * @note   The default reset state of the clock configuration is given below:
-  * @note     HSI ON and used as system clock source 
-  * @note     HSE and PLL OFF
-  * @note     AHB, APB1 and APB2 prescalers set to 1.
-  * @note     CSS and MCO OFF
-  * @note     All interrupts disabled
-  * @note   However, this function doesn't modify the configuration of the
-  * @note     Peripheral clocks
-  * @note     LSI, LSE and RTC clocks                  
+  * @note  The default reset state of the clock configuration is given below:
+  *            - HSI ON and used as system clock source
+  *            - HSE, PLL and PLLI2S OFF
+  *            - AHB, APB1 and APB2 prescaler set to 1.
+  *            - CSS and MCO OFF
+  *            - All interrupts disabled
+  * @note However, This function doesn't modify the configuration of the
+  *            - Peripheral clocks  
+  *            - LSI, LSE and RTC clocks 
   * @param  None
   * @retval None
   */
@@ -336,13 +336,15 @@ void RCC_HSICmd(FunctionalState NewState)
 
 /**
   * @brief  Configures the External Low Speed oscillator (LSE).
-  * @note     As the LSE is in the Backup domain and write access is denied to this
-  *           domain after reset, you have to enable write access using 
-  *           PWR_BackupAccessCmd(ENABLE) function before to configure the LSE
-  *           (to be done once after reset).
-  * @note     After enabling the LSE (RCC_LSE_ON or RCC_LSE_Bypass), the application
-  *           software should wait on LSERDY flag to be set indicating that LSE clock
-  *           is stable and can be used to clock the RTC.
+  * @note   As the LSE is in the Backup domain and write access is denied to this
+  *         domain after reset, you have to enable write access using 
+  *         PWR_BackupAccessCmd(ENABLE) function before to configure the LSE
+  *         (to be done once after reset).
+  * @note   Care must be taken when using this function to configure LSE mode 
+  *         as it clears systematically the LSEON bit before any new configuration.
+  * @note   After enabling the LSE (RCC_LSE_ON or RCC_LSE_Bypass), the application
+  *         software should wait on LSERDY flag to be set indicating that LSE clock
+  *         is stable and can be used to clock the RTC.
   * @param  RCC_LSE: specifies the new state of the LSE.
   *   This parameter can be one of the following values:
   *     @arg RCC_LSE_OFF: turn OFF the LSE oscillator, LSERDY flag goes low after
